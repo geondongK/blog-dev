@@ -15,7 +15,7 @@ import './sass/main.scss';
 // import Feed from './components/layout/Feed';
 // import Footer from './components/Footer';
 // pages
-// import Home from './pages/HomePage';
+import Home from './pages/HomePage';
 import Login from './pages/LoginPage';
 import Register from './pages/RegisterPage';
 // import NewPost from './pages/NewPostPage';
@@ -57,7 +57,7 @@ function App() {
                 {/* <Box sx={{ paddingBottom: '5rem' }}> */}
                 {/* <NavBar /> */}
                 <Routes>
-                    {/* <Route path="/" element={<Home />} /> */}
+                    <Route path="/" element={<Home />} />
                     <Route path="/login" element={<Login />} />
                     <Route path="/register" element={<Register />} />
                     {/* <Route path="/post" element={<NewPost />} />
