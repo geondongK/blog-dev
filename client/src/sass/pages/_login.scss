@@ -1,0 +1,92 @@
+.login-container {
+    height: 100vh;
+    background-color: #eee;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .socialLogin-kakao {
+        border: 1px solid black;
+        border-radius: 4px;
+        padding: 10px;
+        display: flex;
+        align-items: center;
+        font-weight: bold;
+        gap: 10px;
+        cursor: pointer;
+    }
+
+    .login-form {
+        background-color: white;
+        padding: 40px 50px;
+        border-radius: 10px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+
+        .login-title {
+            color: black;
+            font-weight: bold;
+            font-size: 24px;
+        }
+
+        .login-input p {
+            margin-bottom: 3px;
+        }
+
+        .login-link {
+            text-align: right;
+            text-decoration: none;
+            &:link {
+                color: blue;
+            }
+            &:visited {
+                color: blue;
+            }
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            width: 400px;
+
+            input {
+                width: 400px;
+                padding: 10px;
+                border: 1px solid black;
+                border-radius: 4px;
+                &:active {
+                    border: 1px solid #1a237e;
+                }
+            }
+
+            button {
+                background-color: #3d5afe;
+                color: white;
+                padding: 10px;
+                font-weight: bold;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+                &:hover {
+                    background-color: #1a237e;
+                }
+            }
+        }
+    }
+}
+
+// .split-screen {
+//     display: flex;
+//     width: 80%;
+//     height: 500px;
+// }
+
+// .split-screen__half {
+//     display: flex;
+//     flex: 1;
+//     background-color: aquamarine;
+//     align-items: center;
+//     justify-content: center;
+// }
