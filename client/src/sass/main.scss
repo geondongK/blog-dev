@@ -1,11 +1,15 @@
 // variables & functions
 @import './absctracts/variables';
+@import './absctracts/mixins';
 
 // base & layout
-
+@import 'layout/navbar.scss';
 // colors
 
 // components
+@import 'components/buttons';
+
+// pages
 @import 'pages/home';
 @import 'pages/login';
 

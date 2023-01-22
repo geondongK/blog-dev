@@ -11,7 +11,7 @@ import './sass/main.scss';
 // import { login } from './redux/slices/userSlice';
 
 // component
-// import NavBar from './components/NavBar';
+import NavBar from './components/NavBar';
 // import Feed from './components/layout/Feed';
 // import Footer from './components/Footer';
 // pages
@@ -52,10 +52,10 @@ function App() {
     }, []);
 
     return (
-        <div className="container">
+        <div>
             <BrowserRouter>
                 {/* <Box sx={{ paddingBottom: '5rem' }}> */}
-                {/* <NavBar /> */}
+                <NavBar />
                 <Routes>
                     <Route path="/" element={<Home />} />
                     <Route path="/login" element={<Login />} />
