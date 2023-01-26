@@ -4,20 +4,18 @@
 // import React, { Suspense, lazy } from 'react';
 import React, { useEffect } from 'react';
 import './index.css';
+import Navbar from './components/NavBar';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 // import { useDispatch } from 'react-redux';
 import customAxios from './libs/api/axios';
 import './sass/main.scss';
 // import { login } from './redux/slices/userSlice';
 
-// component
-import NavBar from './components/NavBar';
 // import Feed from './components/layout/Feed';
 // import Footer from './components/Footer';
-// pages
 import Home from './pages/HomePage';
 import Login from './pages/LoginPage';
-import Register from './pages/RegisterPage';
+// import Register from './pages/RegisterPage';
 // import NewPost from './pages/NewPostPage';
 // import Blog from './pages/PostPage';
 // import MainPage from './pages/MainPage';
@@ -52,14 +50,15 @@ function App() {
     }, []);
 
     return (
-        <div>
-            <BrowserRouter>
-                {/* <Box sx={{ paddingBottom: '5rem' }}> */}
-                <NavBar />
+        <BrowserRouter>
+            {/* <Box sx={{ paddingBottom: '5rem' }}> */}
+            {/* <Layout> */}
+            <div style={{ height: '100vh' }}>
+                <Navbar />
                 <Routes>
                     <Route path="/" element={<Home />} />
                     <Route path="/login" element={<Login />} />
-                    <Route path="/register" element={<Register />} />
+                    {/* <Route path="/register" element={<Register />} /> */}
                     {/* <Route path="/post" element={<NewPost />} />
                 <Route path="/post/:id" element={<Blog />} />
                 <Route path="/*" element={<NotFound />} />  */}
@@ -76,8 +75,9 @@ function App() {
                 {/* <Footer /> */}
                 {/* </Stack> */}
                 {/* </Box> */}
-            </BrowserRouter>
-        </div>
+                {/* </Layout> */}
+            </div>
+        </BrowserRouter>
     );
 }
 

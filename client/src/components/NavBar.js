@@ -107,7 +107,7 @@ function NavBar() {
                 </div>
             </div>
             <div className="nav-right">
-                <Link to="login">
+                <Link to="/login">
                     <button onClick={handleChecked} type="button">
                         <i>
                             <FontAwesomeIcon
@@ -118,7 +118,7 @@ function NavBar() {
                         로그인
                     </button>
                 </Link>
-                <Link to="register">
+                <Link to="/register">
                     <button onClick={handleChecked} type="button">
                         <i>
                             <FontAwesomeIcon

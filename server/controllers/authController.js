@@ -50,14 +50,14 @@ exports.login = async (req, res) => {
                     // res.json({ auth: false, message: '이메일 또는 비밀번호가 틀립니다.' });
                     res.json({
                         message: false,
-                        error: '이메일 또는 비밀번호가 틀립니다.',
+                        error: '이메일 또는 비밀번호가 일치하지 않습니다.',
                     });
                 }
             });
         } else {
             res.json({
                 message: false,
-                error: '이메일 또는 비밀번호가 틀립니다.',
+                error: '이메일 또는 비밀번호가 일치하지 않습니다.',
             });
         }
     } catch (error) {
