@@ -149,7 +149,7 @@ function RegisterPage() {
                     onSubmit={handleSubmit(onSubmit)}
                 >
                     <div className="register-input">
-                        <p>이메일</p>
+                        <p>별명</p>
                         <input
                             type="text"
                             id="name"
@@ -203,7 +203,7 @@ function RegisterPage() {
                         )}
                     </div>
                     <div className="register-input">
-                        <p>비밀번호</p>
+                        <p>비밀번호 확인</p>
                         <input
                             type="password"
                             id="passwordConfirm"
