@@ -8,7 +8,7 @@ router.post('/login', authController.login);
 // router.post('/login', login);
 
 // 회원가입
-router.post('/signup', authController.signUp);
+router.post('/register', authController.register);
 
 // 로그아웃
 router.post('/logout', authController.logout);

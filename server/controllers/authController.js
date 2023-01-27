@@ -66,7 +66,7 @@ exports.login = async (req, res) => {
 };
 
 // 회원가입.
-exports.signUp = async (req, res) => {
+exports.register = async (req, res) => {
     try {
         const { name, email, password, passwordConfirm } = req.body;
         // console.log(email);

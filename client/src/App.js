@@ -15,7 +15,7 @@ import './sass/main.scss';
 // import Footer from './components/Footer';
 import Home from './pages/HomePage';
 import Login from './pages/LoginPage';
-// import Register from './pages/RegisterPage';
+import Register from './pages/RegisterPage';
 // import NewPost from './pages/NewPostPage';
 // import Blog from './pages/PostPage';
 // import MainPage from './pages/MainPage';
@@ -57,7 +57,7 @@ function App() {
             <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/login" element={<Login />} />
-                {/* <Route path="/register" element={<Register />} /> */}
+                <Route path="/register" element={<Register />} />
                 {/* <Route path="/post" element={<NewPost />} />
                 <Route path="/post/:id" element={<Blog />} />
                 <Route path="/*" element={<NotFound />} />  */}
