@@ -16,7 +16,7 @@
     position: sticky;
     top: 0;
 
-    @include mobile {
+    @include md {
         padding: 15px;
     }
 
@@ -24,7 +24,7 @@
         display: none;
     }
 
-    @include mobile {
+    @include md {
         #nav-menu:checked ~ .nav-right {
             display: initial;
         }
@@ -33,7 +33,7 @@
     label {
         cursor: pointer;
         display: none;
-        @include mobile {
+        @include md {
             display: initial;
         }
     }
@@ -65,7 +65,7 @@
                 border: none;
                 outline: none;
 
-                @include mobile {
+                @include md {
                     width: 150px;
                 }
             }
@@ -89,7 +89,7 @@
         position: relative;
         float: left;
         // gap: 5px;
-        @include mobile {
+        @include md {
             position: absolute;
             top: 100%;
             left: 0;
@@ -111,7 +111,7 @@
                 background-color: #eeeeee;
             }
 
-            @include mobile {
+            @include md {
                 width: 100%;
                 font-weight: bold;
                 font-size: $base-font-size;
@@ -126,7 +126,7 @@
 
         i {
             display: none;
-            @include mobile {
+            @include md {
                 display: initial;
                 margin-right: 10px;
             }
@@ -240,7 +240,7 @@
 //     }
 // }
 // // 768px 화면
-// @include mobile {
+// @include md {
 //     .navbar {
 //         padding: 15px;
 

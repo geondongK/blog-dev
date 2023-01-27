@@ -53,18 +53,17 @@ function App() {
         <BrowserRouter>
             {/* <Box sx={{ paddingBottom: '5rem' }}> */}
             {/* <Layout> */}
-            <div style={{ height: '100vh' }}>
-                <Navbar />
-                <Routes>
-                    <Route path="/" element={<Home />} />
-                    <Route path="/login" element={<Login />} />
-                    {/* <Route path="/register" element={<Register />} /> */}
-                    {/* <Route path="/post" element={<NewPost />} />
+            <Navbar />
+            <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/login" element={<Login />} />
+                {/* <Route path="/register" element={<Register />} /> */}
+                {/* <Route path="/post" element={<NewPost />} />
                 <Route path="/post/:id" element={<Blog />} />
                 <Route path="/*" element={<NotFound />} />  */}
-                </Routes>
-                {/* )} */}
-                {/* <Routes>
+            </Routes>
+            {/* )} */}
+            {/* <Routes>
                     <Route path="/" element={<Home />} />
                     <Route path="/login" element={<Login />} />
                     <Route path="/signup" element={<SignUp />} />
@@ -72,11 +71,10 @@ function App() {
                     <Route path="/post/:id" element={<Blog />} />
                     <Route path="/*" element={<NotFound />} />
                 </Routes> */}
-                {/* <Footer /> */}
-                {/* </Stack> */}
-                {/* </Box> */}
-                {/* </Layout> */}
-            </div>
+            {/* <Footer /> */}
+            {/* </Stack> */}
+            {/* </Box> */}
+            {/* </Layout> */}
         </BrowserRouter>
     );
 }

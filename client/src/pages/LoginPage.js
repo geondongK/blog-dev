@@ -118,8 +118,10 @@ function LoginPage() {
 
     return (
         <div className="login-container">
-            <div className="login-form">
-                <span className="login-title">로그인</span>
+            <div className="login-wrapper">
+                <div className="login-title">
+                    <span>로그인</span>
+                </div>
                 <button
                     onClick={() => {
                         kakaoLogin();
@@ -131,6 +133,7 @@ function LoginPage() {
                     <span>카카오 로그인</span>
                 </button>
                 <hr />
+                {/* <div className="login-form"> */}
                 <form
                     noValidate
                     autoComplete="off"
@@ -175,9 +178,10 @@ function LoginPage() {
                     {!handleLogin ? null : handleLoginError()}
                     <button type="submit">로그인</button>
                 </form>
-                <span className="link">
+                {/* </div> */}
+                <div className="link">
                     <Link to="/register">회원가입</Link>
-                </span>
+                </div>
             </div>
         </div>
     );
