@@ -1,31 +1,32 @@
 /* eslint-disable */
 
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PostCard from './PostCard';
-import Dropdown from './Dropdown';
-import customAxios from '../../libs/api/axios';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEye, faComment, faUser } from '@fortawesome/free-regular-svg-icons';
+import { Link } from 'react-router-dom';
 
-function PostsCard() {
-    // 게시물 출력.
-    const [posts, setPosts] = useState([]);
-    // dropdown 옵션 선택
-    const [selected, setSelected] = useState('');
-
-    useEffect(() => {
-        const fetchPost = async () => {
-            const response = await customAxios.get('/post/postlist');
-            setPosts(response.data);
-            // console.log(response.data);
-        };
-        fetchPost();
-    }, []);
-
+function PostsCard({ post }) {
     return (
-        <div className="posts-container">
-            <Dropdown selected={selected} setSelected={setSelected} />
-            {posts.map(post => (
-                <PostCard post={post} key={post.id} />
-            ))}
+        <div className="postscard">
+            <div className="postcard-container">
+                <PostCard name={post.name} date={post.create_date} />
+                <div className="postscard-body">
+                    <h4 className="postcard-body-title">
+                        <Link to={`post/${post.id}`}>{post.title}</Link>
+                    </h4>
+                </div>
+                <div className="postscard-footer">
+                    <div className="postcard-view-icon">
+                        <FontAwesomeIcon icon={faEye} />
+                        <span>{post.view}</span>
+                    </div>
+                    <div className="postscard-comment-icon">
+                        <FontAwesomeIcon icon={faComment} />
+                        <span>{post.view}</span>
+                    </div>
+                </div>
+            </div>
         </div>
     );
 }

@@ -7,13 +7,20 @@
 // colors
 
 // components
-@import 'components/post';
-@import 'components/buttons';
+@import 'components/postsCard';
+@import 'components/postCard';
 @import 'components/dropdown';
+@import 'components/postContent';
+@import 'components/comments';
+@import 'components/commentsForm';
+@import 'components/comment';
+@import 'components/commentForm';
+@import 'components/nestedComments';
 
 // pages
 @import 'pages/home';
 @import 'pages/login';
 @import 'pages/register';
+@import 'pages/post';
 
-// utilities
+// utilities (maring, padding)

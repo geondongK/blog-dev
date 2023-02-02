@@ -20,11 +20,11 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorder from '@mui/icons-material/FavoriteBorder';
 import React, { useState } from 'react';
 // import { useSelector } from 'react-redux';
-import ReplyForm from './NestedCommentForm';
-import Reply from './NestedComment';
+import ReplyForm from '../NestedCommentForm';
+import Reply from '../NestedComment';
 
 // comment, replies
-function Comment(props) {
+function Comments(props) {
     const {
         comment,
         replies,
@@ -247,4 +247,4 @@ function Comment(props) {
     );
 }
 
-export default Comment;
+export default Comments;

@@ -4,7 +4,7 @@
 import { TextField, Button } from '@mui/material';
 import React, { useState } from 'react';
 
-function CommentForm(props) {
+function CommentsForm(props) {
     const { handleSubmit, submitLabel, textLabel, initialText = '' } = props;
 
     // 댓글 작성.
@@ -50,4 +50,4 @@ function CommentForm(props) {
     );
 }
 
-export default CommentForm;
+export default CommentsForm;

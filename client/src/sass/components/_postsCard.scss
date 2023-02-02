@@ -1,0 +1,27 @@
+.postscard {
+    // background-color: white;
+    // padding: $base-padding;
+    // border-radius: $base-border-radius;
+    margin-top: 10px;
+    background-color: white;
+    padding: $base-padding;
+    border-radius: $base-border-radius;
+    border: 1px solid black;
+
+    .postcard-container {
+        padding: 10px;
+
+        .postscard-footer {
+            display: flex;
+            font-weight: bold;
+            // font-size: $base-font-sm;
+            gap: 10px;
+
+            span {
+                justify-items: center;
+                align-items: center;
+                margin-left: 5px;
+            }
+        }
+    }
+}

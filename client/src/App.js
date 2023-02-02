@@ -3,7 +3,7 @@
 // import './App.css';
 // import React, { Suspense, lazy } from 'react';
 import React, { useEffect } from 'react';
-import './index.css';
+import './index.scss';
 import Navbar from './components/NavBar';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 // import { useDispatch } from 'react-redux';
@@ -16,6 +16,7 @@ import './sass/main.scss';
 import Home from './pages/HomePage';
 import Login from './pages/LoginPage';
 import Register from './pages/RegisterPage';
+import Post from './pages/PostPage';
 // import NewPost from './pages/NewPostPage';
 // import Blog from './pages/PostPage';
 // import MainPage from './pages/MainPage';
@@ -58,6 +59,7 @@ function App() {
                 <Route path="/" element={<Home />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
+                <Route path="/post/:id" element={<Post />} />
                 {/* <Route path="/post" element={<NewPost />} />
                 <Route path="/post/:id" element={<Blog />} />
                 <Route path="/*" element={<NotFound />} />  */}

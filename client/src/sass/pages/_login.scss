@@ -1,12 +1,12 @@
 .errorsMessage {
-    color: red;
+    color: $base-error-color;
 }
 
 .login-container {
     position: relative;
     width: 100%;
-    min-height: 100vh;
-    background-color: #eee;
+    height: calc(100vh - $base-navbar-height);
+    background-color: $base-bg-color;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -14,12 +14,13 @@
     .login-wrapper {
         width: 500px;
         background: #ffffff;
-        border-radius: 10px;
+        border-radius: $base-border-radius * 2.5;
         background-color: white;
+        border: 1px solid $base-main-color;
         padding: 50px 40px;
         @include sm {
             width: 100%;
-            min-height: 100vh;
+            height: calc(100vh - $base-navbar-height);
             padding: 15px 10px;
         }
 
@@ -35,7 +36,7 @@
         .login-title {
             color: black;
             font-weight: bold;
-            font-size: 24px;
+            font-size: $base-font-lg;
             margin-bottom: 10px;
         }
 
@@ -99,7 +100,7 @@
                 padding: 10px;
                 font-weight: bold;
                 border: none;
-                border-radius: 4px;
+                border-radius: $base-border-radius;
                 cursor: pointer;
                 &:hover {
                     background-color: #303f9f;
