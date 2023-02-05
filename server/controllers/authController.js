@@ -21,7 +21,7 @@ exports.login = async (req, res) => {
         if (row[0]) {
             bcryptjs.compare(password, row[0].password, (err, result) => {
                 if (result) {
-                    const { password, ...userInfo } = row[0];
+                    const { password, token, ...userInfo } = row[0];
 
                     const accessToken = AccessToken(userInfo.id, userInfo.name);
                     const refreshToken = RefreshToken();
@@ -116,8 +116,12 @@ exports.register = async (req, res) => {
 exports.logout = async (req, res) => {
     // res.cookie('token', '', { maxAge: 0, origin: 'geondong.com' });
     res.cookie('token', '', { maxAge: 0 });
+    res.clearCookie('token', {
+        secure: true,
+        sameSite: 'none',
+    });
     // res.cookie('refreshToken', '', { maxAge: 0 });
-    res.json({ message: 'success' });
+    res.json({ message: 'logout success' });
 };
 
 // refreshToken 재발급.
