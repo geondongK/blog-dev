@@ -1,22 +1,20 @@
 //   eslint-disable
 /* eslint-disable react/jsx-props-no-spreading */
 /* eslint-disable no-console */
-// , useNavigate
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 // import { useFormik } from 'formik';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
+import { useDispatch } from 'react-redux';
+import { loginSuccess } from '../redux/slices/userSlice';
 import { ReactComponent as KaKaoIcon } from '../assets/images/kakaoLogin.svg';
-
-// import { useDispatch } from 'react-redux';
 import customAxios from '../libs/api/axios';
-// import { login } from '../redux/slices/userSlice';
 
 function LoginPage() {
-    // const dispatch = useDispatch();
-    // const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const [handleLogin, setHandleLogin] = useState(false);
     const [loginMessage, setLoginMessage] = useState('');
@@ -54,59 +52,15 @@ function LoginPage() {
                     console.log(response.data);
                 } else {
                     // 로그인 정보 저장.
-                    // dispatch(
-                    //     login({
-                    //         id: response.data.id,
-                    //         name: response.data.name,
-                    //         isLoggedIn: true,
-                    //     }),
-                    // );
-                    // navigate('/');
+                    console.log();
+                    dispatch(loginSuccess(response.data));
+                    navigate('/');
                 }
             })
             .catch(() => {
                 // console.log(error);
             });
     };
-
-    // const formik = useFormik({
-    //     initialValues: {
-    //         email: '',
-    //         password: '',
-    //     },
-    //     enableReinitialize: true,
-    //     validationSchema: Yup.object({
-    //         // 이메일 변경.
-    //         email: Yup.string()
-    //             .required('이메일을 입력하세요.')
-    //             .email('이메일 형식이 올바르지 않습니다.'),
-    //         password: Yup.string().required('비밀번호를 입력하세요.'),
-    //     }),
-    //     onSubmit: values => {
-    //         setHandleLogin(false);
-    //         customAxios
-    //             .post('auth/login', values)
-    //             .then(response => {
-    //                 if (response.data.error) {
-    //                     setHandleLogin(true);
-    //                     setLoginMessage(response.data.error);
-    //                 } else {
-    //                     // 로그인 정보 저장.
-    //                     // dispatch(
-    //                     //     login({
-    //                     //         id: response.data.id,
-    //                     //         name: response.data.name,
-    //                     //         isLoggedIn: true,
-    //                     //     }),
-    //                     // );
-    //                     // navigate('/');
-    //                 }
-    //             })
-    //             .catch(() => {
-    //                 // console.log(error);
-    //             });
-    //     },
-    // });
 
     const kakaoLogin = () => {
         window.location.href = `${process.env.REACT_APP_API_URL}auth/kakao`;
@@ -146,7 +100,8 @@ function LoginPage() {
                             id="email"
                             name="email"
                             placeholder="이메일"
-                            {...register('email', { required: true })}
+                            {...register('email')}
+                            // {...register('email', { required: true })}
                             onClick={() => {
                                 setHandleLogin(false);
                             }}
