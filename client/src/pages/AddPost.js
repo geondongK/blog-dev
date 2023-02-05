@@ -6,78 +6,113 @@ import { useForm } from 'react-hook-form';
 // import { useFormik } from 'formik';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-import { EditorState } from 'draft-js';
-import { Editor } from 'react-draft-wysiwyg';
-import { convertToHTML } from 'draft-convert';
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
 import customAxios from '../libs/api/axios';
-import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
+
+const modules = {
+    toolbar: [
+        //[{ 'font': [] }],
+        // [{ header: [1, 2, false] }],
+        ['bold', 'italic', 'underline', 'strike', 'blockquote'],
+        [
+            { list: 'ordered' },
+            { list: 'bullet' },
+            { indent: '-1' },
+            { indent: '+1' },
+        ],
+        ['link', 'image'],
+        [{ align: [] }, { color: [] }, { background: [] }], // dropdown with defaults from theme
+        ['clean'],
+    ],
+};
+
+const formats = [
+    //'font',
+    // 'header',
+    'bold',
+    'italic',
+    'underline',
+    'strike',
+    'blockquote',
+    'list',
+    'bullet',
+    'indent',
+    'link',
+    'image',
+    'align',
+    'color',
+    'background',
+];
 
 function AddPost() {
+    const [description, setDescription] = useState('');
+
     const schema = yup.object().shape({
         title: yup.string().required('제목을 입력해주세요'),
+        description: yup.string().required('내용을 입력해주세요.'),
     });
 
     const {
         register,
         handleSubmit,
+        setValue,
+        watch,
         formState: { errors },
         // reset,
     } = useForm({
         resolver: yupResolver(schema),
         defaultValues: {
-            email: '',
-            password: '',
+            title: '',
+            description: '',
         },
         mode: 'onChange',
     });
 
+    const handleDescriptionChange = editor => {
+        setValue('description', editor);
+    };
+
+    const editorContent = watch('description');
+
+    // const handleChange = (content, delta, source, editor) => {
+    //     console.log(editor.getHTML()); // html 사용시
+    //     console.log(JSON.stringify(editor.getContents())); // delta 사용시
+    //     setDescription(editor.getHTML());
+    // };
+
     const onSubmit = values => {
         // reset();
         customAxios
-            .post('auth/login', values)
-            .then(response => {
-                if (response.data.error) {
-                    console.log(response.data);
-                } else {
-                    // 로그인 정보 저장.
-                    // dispatch(
-                    //     login({
-                    //         id: response.data.id,
-                    //         name: response.data.name,
-                    //         isLoggedIn: true,
-                    //     }),
-                    // );
-                    // navigate('/');
-                }
+            .post('post/addpost', {
+                userId: 1,
+                title: values.title,
+                description: values.description,
+                name: '굿모닝',
             })
-            .catch(() => {
-                // console.log(error);
+            .then(response => {
+                // if (response.data.error) {
+                console.log(response.data);
+                // } else {
+                // 로그인 정보 저장.
+                // dispatch(
+                //     login({
+                //         id: response.data.id,
+                //         name: response.data.name,
+                //         isLoggedIn: true,
+                //     }),
+                // );
+                // navigate('/');
+                // }
+            })
+            .catch(error => {
+                console.log(params);
+                console.log(error);
             });
     };
 
-    const [editorState, setEditorState] = useState(() =>
-        EditorState.createEmpty(),
-    );
-    const [convertedContent, setConvertedContent] = useState(null);
-
-    useEffect(() => {
-        const html = convertToHTML(editorState.getCurrentContent());
-        setConvertedContent(html);
-    }, [editorState]);
-
-    console.log(convertedContent);
-
-    // toolbar 설정
-    // const toolbar = {
-    //     list: { inDropdown: true }, // list 드롭다운
-    //     textAlign: { inDropdown: true }, // align 드롭다운
-    //     link: { inDropdown: true }, // link 드롭다운
-    //     history: { inDropdown: false }, // history 드롭다운
-    //     // image: { uploadCallback }, // 이미지 커스텀 업로드
-    // };
-
     return (
-        <div className="texteditor">
+        <div className="addpost">
             <form
                 noValidate
                 autoComplete="off"
@@ -87,38 +122,36 @@ function AddPost() {
                     <span>제목</span>
                     <input
                         type="text"
-                        id="text"
-                        name="text"
+                        id="title"
+                        name="title"
                         placeholder="제목"
                         {...register('title', { required: true })}
                     />
-                    {errors.email && (
+                    {errors.title && (
                         <span className="errorsMessage">
-                            {errors.email.message}
+                            {errors.title.message}
                         </span>
                     )}
                 </div>
-                <Editor
-                    placeholder="게시글을 작성해주세요."
-                    editorState={editorState}
-                    onEditorStateChange={setEditorState}
-                    toolbar={{
-                        list: { inDropdown: true },
-                        textAlign: { inDropdown: true },
-                        link: { inDropdown: true },
-                        history: { inDropdown: false },
-                    }}
-                    localization={{ locale: 'ko' }}
-                    wrapperClassName="wrapper-class"
-                    editorClassName="editor-class"
-                    toolbarClassName="toolbar-class"
-                    // editorStyle={{
-                    //     height: '400px',
-                    //     width: '100%',
-                    //     border: '3px solid lightgray',
-                    //     padding: '20px',
-                    // }}
-                />
+                <div className="quill">
+                    <ReactQuill
+                        id="description"
+                        name="description"
+                        {...register('description', { required: true })}
+                        style={{ height: '600px' }}
+                        theme="snow"
+                        modules={modules}
+                        placeholder="게시물을 작성하세요."
+                        formats={formats}
+                        value={editorContent}
+                        onChange={handleDescriptionChange}
+                    />
+                    {errors.description && (
+                        <span className="errorsMessage">
+                            {errors.description.message}
+                        </span>
+                    )}
+                </div>
                 <button type="submit">저장</button>
             </form>
         </div>

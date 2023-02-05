@@ -1,10 +1,12 @@
-//  eslint-disable
+/* eslint-disable*/
 import React from 'react';
 import moment from 'moment';
 import 'moment/locale/ko';
+import Dompurify from 'dompurify';
 import { ReactComponent as Avatar } from '../../assets/images/avatar.svg';
 
 function postContent({ postcontent }) {
+    const codes = '<b>Will This Work?</b>';
     return (
         <div className="postcontent">
             <div className="postcontent-card">
@@ -29,7 +31,23 @@ function postContent({ postcontent }) {
             <hr />
             <h2>{postcontent.title}</h2>
             <hr />
-            <p>{postcontent.body}</p>
+            <p>{postcontent.description}</p>
+            {/* <p>
+                dangerouslySetInnerHTML=
+                {{
+                    __html: Dompurify.sanitize(String(<p>hi</p>)),
+                }}
+            </p> */}
+            {/* <div> */}
+            {/* <div>
+                dangerouslySetInnerHTML={{ __html: Dompurify.sanitize(codes) }}
+            </div> */}
+            {/* <div>dangerouslySetInnerHTML={data()}</div> */}
+            {/* <div>dangerouslySetInnerHTML={{ __html: data }}</div> */}
+            {/* dangerouslySetInnerHTML={{ __html: abc() }} */}
+            {/* dangerouslySetInnerHTML={{ __html: postContent.description }} */}
+            {/* </div> */}
+            {/* <p>dangerouslySetInnerHTML={{ _html: postcontent.description }}</p> */}
         </div>
     );
 }

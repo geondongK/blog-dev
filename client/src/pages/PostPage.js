@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-/*  eslint-disable */
+//   eslint-disable
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import Postcontent from '../components/PostContent/postContent';
@@ -50,9 +50,9 @@ function PostPage() {
                 {/* </div> */}
                 <div className="post-comment">
                     <PostCommentForm
-                        submitLabel={'댓글달기'}
-                        textLabel={'댓글 달기'}
-                        buttonHidden={true}
+                        submitLabel="댓글달기"
+                        textLabel="댓글 달기"
+                        buttonHidden
                     />
                 </div>
             </div>
