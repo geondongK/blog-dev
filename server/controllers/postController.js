@@ -32,20 +32,28 @@ exports.getById = async (req, res) => {
 };
 
 // 게시물 작성
-exports.newpost = async (req, res) => {
+exports.addpost = async (req, res) => {
     try {
-        const { userId, title, body, name } = req.body;
+        const { userId, title, description, name } = req.body;
+        // const { title } = req.body;
 
         const today = moment().format('YYYY.MM.DD HH:mm');
 
         const query =
-            'INSERT INTO post (user_id, title, body, name, create_date) VALUES (?,?,?,?,?)';
-        const row = await pool.query(query, [userId, title, body, name, today]);
+            'INSERT INTO post (user_id, title, description, name, create_date) VALUES (?,?,?,?,?)';
+        const row = await pool.query(query, [
+            userId,
+            title,
+            description,
+            name,
+            today,
+        ]);
 
         res.status(200).json({
             row: row,
         });
     } catch (error) {
+        console.log(req.body);
         res.json({ error: error.message });
     }
 };
