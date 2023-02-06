@@ -116,10 +116,10 @@ exports.register = async (req, res) => {
 exports.logout = async (req, res) => {
     // res.cookie('token', '', { maxAge: 0, origin: 'geondong.com' });
     res.cookie('token', '', { maxAge: 0 });
-    res.clearCookie('token', {
-        secure: true,
-        sameSite: 'none',
-    });
+    // res.clearCookie('token', {
+    //     secure: true,
+    //     sameSite: 'none',
+    // });
     // res.cookie('refreshToken', '', { maxAge: 0 });
     res.json({ message: 'logout success' });
 };
