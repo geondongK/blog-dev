@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable no-console */
-/* eslint-disable */
+//  eslint-disable
 import React, { useEffect, useRef, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
@@ -18,7 +18,7 @@ import { persistor } from '../redux/store/store';
 
 function NavBar() {
     const checkedRef = useRef(false);
-    const [search, setSearch] = useState('');
+    const [q, SetQ] = useState('');
     const [checked, setChecked] = useState(true);
 
     // console.log(search, setSearch);
@@ -35,7 +35,9 @@ function NavBar() {
 
     const onKeyDown = e => {
         if (e.key === 'Enter') {
-            alert('hi');
+            if (q.length >= 1) {
+                navigate(`/search?q=${q}`);
+            }
         }
     };
 
@@ -89,6 +91,7 @@ function NavBar() {
                     </i>
                     <input
                         onKeyDown={onKeyDown}
+                        onChange={e => SetQ(e.target.value)}
                         className="search-input"
                         type="search"
                         placeholder="검색"

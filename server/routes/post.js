@@ -23,6 +23,6 @@ router.put('/view/:id', postController.addView);
 router.get('/tags', postController.getByTag);
 
 // 검색.
-router.get('/search', postController.search);
+router.post('/search', postController.search);
 
 module.exports = router;

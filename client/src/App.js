@@ -19,6 +19,7 @@ import Login from './pages/LoginPage';
 import Register from './pages/RegisterPage';
 import Post from './pages/PostPage';
 import AddPost from './pages/AddPost';
+import Search from './pages/SearchPage';
 // import NewPost from './pages/NewPostPage';
 // import Blog from './pages/PostPage';
 // import MainPage from './pages/MainPage';
@@ -63,6 +64,7 @@ function App() {
                 <Route path="/register" element={<Register />} />
                 <Route path="/post/:id" element={<Post />} />
                 <Route path="/post" element={<AddPost />} />
+                <Route path="/search" element={<Search />} />
                 {/* <Route path="/post" element={<NewPost />} />
                 <Route path="/post/:id" element={<Blog />} />
                 <Route path="/*" element={<NotFound />} />  */}

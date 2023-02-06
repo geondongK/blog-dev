@@ -112,43 +112,43 @@ exports.search = async (req, res) => {
 };
 
 // 조회 내림차순.
-exports.search = async (req, res) => {
-    const sort = req.query.sort;
+// exports.search = async (req, res) => {
+//     const sort = req.query.sort;
 
-    try {
-        const query =
-            'SELECT id, title, body, name, view, create_date FROM post ORDER BY id DESC';
-        const row = await pool.query(query);
-        res.json(row);
-    } catch (error) {
-        res.json({ error: error.message });
-    }
-};
+//     try {
+//         const query =
+//             'SELECT id, title, body, name, view, create_date FROM post ORDER BY id DESC';
+//         const row = await pool.query(query);
+//         res.json(row);
+//     } catch (error) {
+//         res.json({ error: error.message });
+//     }
+// };
 
 // 조회 오름차순.
-exports.search = async (req, res) => {
-    const search = req.query.q;
+// exports.search = async (req, res) => {
+//     const search = req.query.q;
 
-    try {
-        const query =
-            'SELECT id, title, body, name, view, create_date FROM post ORDER BY id ASC';
-        const row = await pool.query(query);
-        res.json(row);
-    } catch (error) {
-        res.json({ error: error.message });
-    }
-};
+//     try {
+//         const query =
+//             'SELECT id, title, body, name, view, create_date FROM post ORDER BY id ASC';
+//         const row = await pool.query(query);
+//         res.json(row);
+//     } catch (error) {
+//         res.json({ error: error.message });
+//     }
+// };
 
 // 조회 내림차순.
-exports.search = async (req, res) => {
-    const search = req.query.q;
+// exports.search = async (req, res) => {
+//     const search = req.query.q;
 
-    try {
-        const query =
-            'SELECT id, title, body, name, view, create_date FROM post ORDER BY id ASC';
-        const row = await pool.query();
-        res.json(row);
-    } catch (error) {
-        res.json({ error: error.message });
-    }
-};
+//     try {
+//         const query =
+//             'SELECT id, title, body, name, view, create_date FROM post ORDER BY id ASC';
+//         const row = await pool.query();
+//         res.json(row);
+//     } catch (error) {
+//         res.json({ error: error.message });
+//     }
+// };
