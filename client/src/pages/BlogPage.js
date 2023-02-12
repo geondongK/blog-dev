@@ -30,14 +30,14 @@
 //     // 댓글 조회
 //     const commentList = commentsList.filter(
 //         getCommentsList =>
-//             getCommentsList.parent_id === null ||
+//             getCommentsList.parentId === null ||
 //             getCommentsList.is_deleted === true,
 //     );
 
 //     // 대댓글 조회
 //     const getReplies = commentId => {
 //         return commentsList.filter(
-//             getReplyComment => getReplyComment.parent_id === commentId,
+//             getReplyComment => getReplyComment.parentId === commentId,
 //         );
 //     };
 

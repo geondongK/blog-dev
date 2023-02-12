@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 /* eslint-disable react/prop-types */
 // eslint-disable
 import React, { useState } from 'react';
@@ -7,7 +6,9 @@ function CommentForm({
     handleSubmit,
     submitLabel,
     textLabel,
-    buttonHidden,
+    // buttonHidden,
+    handleCancel,
+    handleCancelButton = false,
     initialText = '',
 }) {
     // 댓글 작성.
@@ -37,9 +38,15 @@ function CommentForm({
                     ) : (
                         <button type="button">{submitLabel}</button>
                     )}
-                    <button hidden={buttonHidden} type="button">
-                        취소
-                    </button>
+                    {handleCancelButton && (
+                        <button
+                            // hidden={buttonHidden}
+                            onClick={handleCancel}
+                            type="button"
+                        >
+                            취소
+                        </button>
+                    )}
                 </div>
             </form>
         </div>

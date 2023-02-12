@@ -1,22 +1,46 @@
-/* eslint-disable no-console */
 /* eslint-disable react/prop-types */
 /* eslint-disable */
-import React from 'react';
-import moment from 'moment';
+import React, { useState, useEffect } from 'react';
+// import moment from 'moment';
 import 'moment/locale/ko';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faComments } from '@fortawesome/free-regular-svg-icons';
-import { ReactComponent as Avatar } from '../../assets/images/avatar.svg';
+import { faCommentDots } from '@fortawesome/free-regular-svg-icons';
+// import { ReactComponent as Avatar } from '../../assets/images/avatar.svg';
+import CommentForm from './CommentForm';
 import NestedComments from './NestedComments';
 
-function Comment({ postComment }) {
+function Comment({
+    mainPostComment,
+    subPostComment,
+    addComment,
+    editComment,
+    activeComment,
+    setActiveComment,
+    deleteComment,
+    commentId,
+}) {
+    // 대댓글 오픈.
+    const [showNestedComments, setShowNestedComments] = useState(false);
+
+    // 답글 클릭일 경우.
+    const isReplying =
+        activeComment &&
+        activeComment.type === 'replying' &&
+        activeComment.id === commentId;
+
     return (
         <div className="postcomment">
             <div className="postcomment-card">
                 <NestedComments
-                    name={postComment.name}
-                    date={postComment.create_date}
-                    body={postComment.comment_body}
+                    commentId={commentId}
+                    userId={mainPostComment.userId}
+                    name={mainPostComment.userName}
+                    description={mainPostComment.description}
+                    createDate={mainPostComment.createDate}
+                    activeComment={activeComment}
+                    setActiveComment={setActiveComment}
+                    editComment={editComment}
+                    deleteComment={deleteComment}
                 />
                 {/* <div className="postcard-header">
                     <div className="postcard-info">
@@ -39,17 +63,60 @@ function Comment({ postComment }) {
                 {/* <p>{postComment.comment_body}</p> */}
             </div>
             <button type="button">
-                <FontAwesomeIcon icon={faComments} />
-            </button>
-            <button type="button">답글작성</button>
-            {/* 중첩 댓글 */}
-            {/* <div className="aaa">
-                <NestedComments
-                    name={postComment.name}
-                    date={postComment.create_date}
-                    body={postComment.comment_body}
+                <FontAwesomeIcon
+                    onClick={() => {
+                        setShowNestedComments(!showNestedComments);
+                    }}
+                    icon={faCommentDots}
                 />
-            </div> */}
+                {subPostComment.length}
+            </button>
+            <button
+                onClick={() => {
+                    setActiveComment({
+                        id: commentId,
+                        type: 'replying',
+                    });
+                }}
+                type="button"
+            >
+                답글작성
+            </button>
+            {/* 대댓글 작성 */}
+            {isReplying && (
+                <div>
+                    <CommentForm
+                        submitLabel="답글달기"
+                        textLabel="답글 달기"
+                        handleCancelButton
+                        handleSubmit={newComment => {
+                            addComment(newComment, mainPostComment.id);
+                        }}
+                        handleCancel={() => {
+                            setActiveComment(null);
+                        }}
+                    />
+                </div>
+            )}
+            {/* 대댓글 */}
+            {showNestedComments && (
+                <div>
+                    {subPostComment.map(nestedComments => (
+                        <NestedComments
+                            key={nestedComments.id}
+                            commentId={nestedComments.id}
+                            userId={nestedComments.userId}
+                            name={nestedComments.userName}
+                            description={nestedComments.description}
+                            createDate={nestedComments.createDate}
+                            activeComment={activeComment}
+                            setActiveComment={setActiveComment}
+                            editComment={editComment}
+                            deleteComment={deleteComment}
+                        />
+                    ))}
+                </div>
+            )}
         </div>
     );
 }

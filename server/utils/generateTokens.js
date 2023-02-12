@@ -4,9 +4,9 @@ const pool = require('../database/connectMaria');
 // JWT 토큰 발급 및 인증
 module.exports = {
     //  AccessToken 발급
-    AccessToken: (id, name, type) => {
+    AccessToken: id => {
         // const payload = {};
-        return jwt.sign({ id, name, type }, process.env.ACCESS_TOKEN_SECRET, {
+        return jwt.sign({ id }, process.env.ACCESS_TOKEN_SECRET, {
             expiresIn: '30m', // 토큰의 만료시간 10분 or 15분
             algorithm: 'HS256', // 암호화
             // issuer: 'localhost', // 발급자명
