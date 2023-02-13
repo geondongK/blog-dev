@@ -1,6 +1,7 @@
 const pool = require('../database/connectMaria');
 const jwt = require('jsonwebtoken');
 const moment = require('moment');
+// const fsExtra = require('fs-extra');
 
 // 게시물 리스트
 exports.postList = async (req, res) => {
@@ -37,6 +38,8 @@ exports.addpost = async (req, res) => {
         const { userId, title, description, name } = req.body;
         // const { title } = req.body;
 
+        console.log(userId, title, description, name);
+
         const today = moment().format('YYYY.MM.DD HH:mm');
 
         const query =
@@ -48,6 +51,12 @@ exports.addpost = async (req, res) => {
             name,
             today,
         ]);
+
+        // try {
+        //     fsExtra.emptyDirSync('./public/uploads');
+        // } catch (err) {
+        //     console.error(err);
+        // }
 
         res.status(200).json({
             row: row,

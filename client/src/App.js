@@ -65,6 +65,7 @@ function App() {
                 <Route path="/post/:id" element={<Post />} />
                 <Route path="/post" element={<AddPost />} />
                 <Route path="/search" element={<Search />} />
+                <Route path="/add" element={<AddPost />} />
                 {/* <Route path="/post" element={<NewPost />} />
                 <Route path="/post/:id" element={<Blog />} />
                 <Route path="/*" element={<NotFound />} />  */}

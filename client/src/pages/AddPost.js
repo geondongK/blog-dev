@@ -1,123 +1,136 @@
 /* eslint-disable react/no-danger */
 /* eslint-disable no-console */
-/*   eslint-disable */
-import React, { useState, useEffect } from 'react';
-import { useForm } from 'react-hook-form';
-// import { useFormik } from 'formik';
-import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from 'yup';
-import ReactQuill from 'react-quill';
+//   eslint-disable
+import React, { useMemo, useRef, useState } from 'react';
+import ReactQuill, { Quill } from 'react-quill';
+
 import 'react-quill/dist/quill.snow.css';
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+
+import ImageResize from 'quill-image-resize';
 import customAxios from '../libs/api/axios';
 
-const modules = {
-    toolbar: [
-        //[{ 'font': [] }],
-        // [{ header: [1, 2, false] }],
-        ['bold', 'italic', 'underline', 'strike', 'blockquote'],
-        [
-            { list: 'ordered' },
-            { list: 'bullet' },
-            { indent: '-1' },
-            { indent: '+1' },
-        ],
-        ['link', 'image'],
-        [{ align: [] }, { color: [] }, { background: [] }], // dropdown with defaults from theme
-        ['clean'],
-    ],
-};
-
-const formats = [
-    //'font',
-    // 'header',
-    'bold',
-    'italic',
-    'underline',
-    'strike',
-    'blockquote',
-    'list',
-    'bullet',
-    'indent',
-    'link',
-    'image',
-    'align',
-    'color',
-    'background',
-];
-
+Quill.register('modules/ImageResize', ImageResize);
 function AddPost() {
-    const [description, setDescription] = useState('');
-
-    const schema = yup.object().shape({
-        title: yup.string().required('제목을 입력해주세요'),
-        description: yup.string().required('내용을 입력해주세요.'),
+    const [postInfo, setPostInfo] = useState({
+        title: '',
+        description: '',
     });
+    const [isError, setError] = useState(null);
 
-    const {
-        register,
-        handleSubmit,
-        setValue,
-        watch,
-        formState: { errors },
-        // reset,
-    } = useForm({
-        resolver: yupResolver(schema),
-        defaultValues: {
-            title: '',
-            description: '',
-        },
-        mode: 'onChange',
-    });
+    const quillRef = useRef();
 
-    const handleDescriptionChange = editor => {
-        setValue('description', editor);
+    const { currentUser } = useSelector(state => state.user);
+    const navigate = useNavigate();
+
+    const imageHandler = () => {
+        // 이미지를 저장할 input type=file DOM을 생성.
+        const input = document.createElement('input');
+
+        input.setAttribute('type', 'file');
+        input.setAttribute('accept', 'image/*');
+        input.click();
+
+        input.addEventListener('change', async () => {
+            const file = input.files[0];
+
+            const formData = new FormData();
+            formData.append('file', file);
+
+            try {
+                const response = await customAxios.post('/upload', formData);
+
+                const IMG_URL = `${process.env.REACT_APP_API_URL_IMAGE}${response.data}`;
+
+                const editor = quillRef.current.getEditor();
+
+                const range = editor.getSelection();
+
+                editor.insertEmbed(range.index, 'image', IMG_URL);
+            } catch (error) {
+                // console.log(error);
+            }
+        });
     };
 
-    const editorContent = watch('description');
+    const handleChangeValue = e => {
+        setPostInfo(prev => ({ ...prev, [e.target.name]: e.target.value }));
+    };
 
-    // const handleChange = (content, delta, source, editor) => {
-    //     console.log(editor.getHTML()); // html 사용시
-    //     console.log(JSON.stringify(editor.getContents())); // delta 사용시
-    //     setDescription(editor.getHTML());
-    // };
+    const handleChangeDescription = value => {
+        setPostInfo({ ...postInfo, description: value });
+    };
 
-    const onSubmit = values => {
-        // reset();
+    const onSubmit = e => {
+        e.preventDefault();
+        if (postInfo.title.length < 5) {
+            setError('5자리 이상 !');
+            return;
+        }
         customAxios
-            .post('post/addpost', {
-                userId: 1,
-                title: values.title,
-                description: values.description,
-                name: '굿모닝',
+            .post('/post', {
+                userId: currentUser.user.id,
+                title: postInfo.title,
+                description: postInfo.description,
+                name: currentUser.user.name,
             })
             .then(response => {
-                // if (response.data.error) {
+                navigate('/');
                 console.log(response.data);
-                // } else {
-                // 로그인 정보 저장.
-                // dispatch(
-                //     login({
-                //         id: response.data.id,
-                //         name: response.data.name,
-                //         isLoggedIn: true,
-                //     }),
-                // );
-                // navigate('/');
-                // }
             })
             .catch(error => {
-                console.log(params);
                 console.log(error);
             });
     };
 
+    const modules = useMemo(
+        () => ({
+            toolbar: {
+                container: [
+                    // [{ header: [1, 2, false] }],
+                    ['bold', 'italic', 'underline', 'strike', 'blockquote'],
+                    [
+                        { list: 'ordered' },
+                        { list: 'bullet' },
+                        { indent: '-1' },
+                        { indent: '+1' },
+                    ],
+                    ['link', 'image'],
+                    [{ align: [] }, { color: [] }, { background: [] }],
+                    ['clean'],
+                ],
+                handlers: { image: imageHandler },
+            },
+            ImageResize: {
+                parchment: Quill.import('parchment'),
+            },
+        }),
+
+        [],
+    );
+
+    const formats = [
+        // 'font',
+        // 'header',
+        'bold',
+        'italic',
+        'underline',
+        'strike',
+        'blockquote',
+        'list',
+        'bullet',
+        'indent',
+        'link',
+        'image',
+        'align',
+        'color',
+        'background',
+    ];
+
     return (
         <div className="addpost">
-            <form
-                noValidate
-                autoComplete="off"
-                onSubmit={handleSubmit(onSubmit)}
-            >
+            <form noValidate autoComplete="off" onSubmit={onSubmit}>
                 <div className="title">
                     <span>제목</span>
                     <input
@@ -125,35 +138,29 @@ function AddPost() {
                         id="title"
                         name="title"
                         placeholder="제목"
-                        {...register('title', { required: true })}
+                        value={postInfo.title}
+                        onChange={handleChangeValue}
                     />
-                    {errors.title && (
-                        <span className="errorsMessage">
-                            {errors.title.message}
-                        </span>
-                    )}
                 </div>
                 <div className="quill">
                     <ReactQuill
-                        id="description"
-                        name="description"
-                        {...register('description', { required: true })}
-                        style={{ height: '600px' }}
+                        ref={quillRef}
                         theme="snow"
                         modules={modules}
-                        placeholder="게시물을 작성하세요."
+                        placeholder="게시물을 작성해 주세요."
+                        value={postInfo.description}
+                        onChange={handleChangeDescription}
                         formats={formats}
-                        value={editorContent}
-                        onChange={handleDescriptionChange}
+                        id="description"
+                        name="description"
+                        style={{ height: 600 }}
                     />
-                    {errors.description && (
-                        <span className="errorsMessage">
-                            {errors.description.message}
-                        </span>
-                    )}
                 </div>
-                <button type="submit">저장</button>
+                <button style={{ cursor: 'pointer' }} type="submit">
+                    저장
+                </button>
             </form>
+            {isError !== null && <div className="errors"> {isError} </div>}
         </div>
     );
 }

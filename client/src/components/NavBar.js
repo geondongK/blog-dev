@@ -12,6 +12,7 @@ import {
     faRightFromBracket,
     faUserPlus,
     faXmark,
+    faPenToSquare,
 } from '@fortawesome/free-solid-svg-icons';
 import customAxios from '../libs/api/axios';
 import { persistor } from '../redux/store/store';
@@ -125,6 +126,18 @@ function NavBar() {
                 </div>
             ) : (
                 <div className="nav-right">
+                    <Link to="/add">
+                        <button onClick={handleChecked} type="button">
+                            <i>
+                                <FontAwesomeIcon
+                                    className="right-icon"
+                                    icon={faPenToSquare}
+                                />
+                            </i>
+                            글작성
+                        </button>
+                    </Link>
+
                     <button
                         onClick={() => {
                             handleLogout();

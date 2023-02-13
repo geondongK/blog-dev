@@ -10,6 +10,7 @@ const postRoutes = require('./routes/post');
 const commentRoutes = require('./routes/comment');
 const authRoutes = require('./routes/auth');
 const likedRoutes = require('./routes/liked');
+const multer = require('multer');
 
 const app = express();
 // DB 암호화
@@ -17,6 +18,18 @@ require('dotenv').config();
 /* token 암호화 생성법 */
 /* node */
 /* require('crypto').randomBytes(64).toString('hex') */
+
+/* Middleware */
+app.use(function (req, res, next) {
+    res.header('Content-Type', 'application/json;charset=UTF-8');
+    res.header('Access-Control-Allow-Credentials', true);
+    res.header(
+        'Access-Control-Allow-Headers',
+        'Origin, X-Requested-With, Content-Type, Accept',
+    );
+    next();
+});
+
 app.use(
     cors({
         origin: [
@@ -34,20 +47,26 @@ app.use(
     }),
 );
 
-app.use(function (req, res, next) {
-    res.header('Content-Type', 'application/json;charset=UTF-8');
-    res.header('Access-Control-Allow-Credentials', true);
-    res.header(
-        'Access-Control-Allow-Headers',
-        'Origin, X-Requested-With, Content-Type, Accept',
-    );
-    next();
-});
-
-/* Middleware */
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(cookieParser());
+app.use(express.static('public'));
+
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, './public/uploads');
+    },
+    filename: function (req, file, cb) {
+        cb(null, Date.now() + file.originalname);
+    },
+});
+
+const upload = multer({ storage: storage });
+
+app.post('/api/upload', upload.single('file'), (req, res) => {
+    const file = req.file;
+    res.status(200).json(file.filename);
+});
 
 app.use('/api/user', userRoutes);
 app.use('/api/post', postRoutes);

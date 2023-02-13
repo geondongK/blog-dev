@@ -5,7 +5,7 @@ const { verifyToken } = require('../middleware/verifyToken');
 
 // 게시물 작성
 // router.post('/addpost', verifyToken, postController.addpost);
-router.post('/addpost', postController.addpost);
+router.post('/', postController.addpost);
 
 // 게시물 리스트
 router.get('/postList', postController.postList);
