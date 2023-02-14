@@ -99,7 +99,7 @@ function Comments(props) {
                             {comment.name} •
                         </Typography>
                         <Typography variant="caption" display="block">
-                            &nbsp;{comment.create_date}
+                            &nbsp;{comment.createDate}
                         </Typography>
                     </Box>
                     {/* 편집 기능. */}

@@ -7,7 +7,7 @@ import { faSortDown } from '@fortawesome/free-solid-svg-icons';
 
 function Dropdown({ selected, setSelected }) {
     const [dropdownShow, setDropdownShow] = useState(false);
-    const options = ['오름차순', '내림차순', '조회순', '댓글순'];
+    const options = ['최신순', '오래된순', '조회수'];
 
     // const handleDropdownClick = () => {
     //     setDropdownShow(!dropdownShow);

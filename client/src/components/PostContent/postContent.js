@@ -20,7 +20,7 @@ function postContent({ postcontent, description }) {
                         <div className="postcard-info-details">
                             <span>{postcontent.name}</span>
                             <span>
-                                {moment(postContent.create_date).format(
+                                {moment(postContent.creatDate).format(
                                     'YYYY년 M월 D일',
                                 )}
                             </span>

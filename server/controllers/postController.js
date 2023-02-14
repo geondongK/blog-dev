@@ -43,7 +43,7 @@ exports.addpost = async (req, res) => {
         const today = moment().format('YYYY.MM.DD HH:mm');
 
         const query =
-            'INSERT INTO post (user_id, title, description, name, create_date) VALUES (?,?,?,?,?)';
+            'INSERT INTO post (userId, title, description, name, createDate) VALUES (?,?,?,?,?)';
         const row = await pool.query(query, [
             userId,
             title,
@@ -51,12 +51,6 @@ exports.addpost = async (req, res) => {
             name,
             today,
         ]);
-
-        // try {
-        //     fsExtra.emptyDirSync('./public/uploads');
-        // } catch (err) {
-        //     console.error(err);
-        // }
 
         res.status(200).json({
             row: row,
@@ -94,18 +88,18 @@ exports.addView = async (req, res) => {
 };
 
 // 태그.
-exports.getByTag = async (req, res) => {
-    const tags = req.query.tags.split(',');
-    console.log(tags);
+// exports.getByTag = async (req, res) => {
+//     const tags = req.query.tags.split(',');
+//     console.log(tags);
 
-    try {
-        const query = 'SELECT * FROM tags = ?';
-        const row = await pool.query(query, [tags]);
-        res.json({ success: true }, row);
-    } catch (error) {
-        res.json({ error: error.message });
-    }
-};
+//     try {
+//         const query = 'SELECT * FROM tags = ?';
+//         const row = await pool.query(query, [tags]);
+//         res.json({ success: true }, row);
+//     } catch (error) {
+//         res.json({ error: error.message });
+//     }
+// };
 
 // 검색.
 exports.search = async (req, res) => {
@@ -119,45 +113,3 @@ exports.search = async (req, res) => {
         res.json({ error: error.message });
     }
 };
-
-// 조회 내림차순.
-// exports.search = async (req, res) => {
-//     const sort = req.query.sort;
-
-//     try {
-//         const query =
-//             'SELECT id, title, body, name, view, create_date FROM post ORDER BY id DESC';
-//         const row = await pool.query(query);
-//         res.json(row);
-//     } catch (error) {
-//         res.json({ error: error.message });
-//     }
-// };
-
-// 조회 오름차순.
-// exports.search = async (req, res) => {
-//     const search = req.query.q;
-
-//     try {
-//         const query =
-//             'SELECT id, title, body, name, view, create_date FROM post ORDER BY id ASC';
-//         const row = await pool.query(query);
-//         res.json(row);
-//     } catch (error) {
-//         res.json({ error: error.message });
-//     }
-// };
-
-// 조회 내림차순.
-// exports.search = async (req, res) => {
-//     const search = req.query.q;
-
-//     try {
-//         const query =
-//             'SELECT id, title, body, name, view, create_date FROM post ORDER BY id ASC';
-//         const row = await pool.query();
-//         res.json(row);
-//     } catch (error) {
-//         res.json({ error: error.message });
-//     }
-// };

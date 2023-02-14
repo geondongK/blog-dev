@@ -71,7 +71,7 @@ function HomePageCard() {
                         avatar={<Avatar aria-label="recipe" />}
                         title={row.name}
                         subheader={moment(
-                            row.create_date,
+                            row.createDate,
                             'YYYYMMDDHHmmss',
                         ).fromNow('YYYY-MM-DD HH:mm:ss')}
                     />

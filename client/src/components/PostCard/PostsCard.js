@@ -10,7 +10,7 @@ function PostsCard({ post }) {
     return (
         <div className="postscard">
             <div className="postcard-container">
-                <PostCard name={post.name} date={post.create_date} />
+                <PostCard name={post.name} date={post.createDate} />
                 <div className="postscard-body">
                     <h4 className="postcard-body-title">
                         <Link to={`post/${post.id}`}>{post.title}</Link>

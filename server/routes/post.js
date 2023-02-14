@@ -20,7 +20,7 @@ router.get('/get/:id', postController.getById);
 router.put('/view/:id', postController.addView);
 
 // 태그.
-router.get('/tags', postController.getByTag);
+// router.get('/tags', postController.getByTag);
 
 // 검색.
 router.post('/search', postController.search);
