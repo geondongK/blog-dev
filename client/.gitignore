@@ -6,6 +6,8 @@
 .pnp.js
 /material.txt
 
+# components
+src/components/PostCard/Dropdown.js
 # src/util
 # src/util/Cookie.js
 src/pages/ProfilePage.js

@@ -1,28 +1,27 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable react/no-danger */
 /* eslint-disable no-console */
-//   eslint-disable
+/* eslint-disable */
 import React, { useMemo, useRef, useState } from 'react';
 import ReactQuill, { Quill } from 'react-quill';
+import { useParams, useNavigate } from 'react-router-dom';
 
 import 'react-quill/dist/quill.snow.css';
-import { useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-
 import ImageResize from 'quill-image-resize';
-import customAxios from '../libs/api/axios';
+import customAxios from '../../libs/api/axios';
 
 Quill.register('modules/ImageResize', ImageResize);
-function AddPost() {
+function EditPosts({ postcontent }) {
     const [postInfo, setPostInfo] = useState({
-        title: '',
-        description: '',
+        title: postcontent.title,
+        description: postcontent.description,
     });
     const [isError, setError] = useState(null);
 
     const quillRef = useRef();
 
-    const { currentUser } = useSelector(state => state.user);
     const navigate = useNavigate();
+    const { id } = useParams();
 
     const imageHandler = () => {
         // 이미지를 저장할 input type=file DOM을 생성.
@@ -40,8 +39,6 @@ function AddPost() {
 
             try {
                 const response = await customAxios.post('/upload', formData);
-
-                console.log(response.data);
 
                 const IMG_URL = `${process.env.REACT_APP_API_URL_IMAGE}${response.data}`;
 
@@ -71,11 +68,10 @@ function AddPost() {
             return;
         }
         customAxios
-            .post('/post', {
-                userId: currentUser.user.id,
+            .put(`/post/edit/${id}`, {
+                id,
                 title: postInfo.title,
                 description: postInfo.description,
-                name: currentUser.user.name,
             })
             .then(response => {
                 navigate('/');
@@ -167,4 +163,4 @@ function AddPost() {
     );
 }
 
-export default AddPost;
+export default EditPosts;

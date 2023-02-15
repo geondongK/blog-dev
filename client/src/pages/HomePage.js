@@ -7,18 +7,26 @@ import PostsCard from '../components/PostCard/PostsCard';
 function HomePage() {
     // 게시물 출력.
     const [posts, setPosts] = useState([]);
-    // dropdown 옵션 선택
-    // const [selected, setSelected] = useState([]);
 
-    // const handleChange = (a, b, c) => {
-    //     const dateDesc = posts
-    //         .filter(post => post.id !== null)
-    //         .sort((a, b) => new Date(b.createDate) - new Date(a.createDate));
-    // };
-
-    // const dateDesc = posts
-    //     .filter(post => post.id !== null)
-    //     .sort((a, b) => new Date(b.createDate) - new Date(a.createDate));
+    // 게시물 삭제 기능.
+    const deletePost = async postId => {
+        // eslint-disable-next-line no-alert
+        if (window.confirm('게시물을 삭제하시겠습니까?')) {
+            await customAxios
+                .delete('/post', {
+                    data: {
+                        postId,
+                    },
+                })
+                .then(() => {
+                    const newPosts = posts.filter(post => post.id !== postId);
+                    setPosts(newPosts);
+                })
+                .catch(() => {
+                    // console.log(error);
+                });
+        }
+    };
 
     const handleChangeValue = sort => {
         // 최신
@@ -87,7 +95,7 @@ function HomePage() {
                 </button>
             </div>
             {posts.map(post => (
-                <PostsCard post={post} key={post.id} />
+                <PostsCard post={post} key={post.id} deletePost={deletePost} />
             ))}
         </div>
     );

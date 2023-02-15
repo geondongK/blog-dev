@@ -1,32 +1,45 @@
 /* eslint-disable jsx-a11y/interactive-supports-focus */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable react/prop-types */
+/* eslint-disable */
+
 import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSortDown } from '@fortawesome/free-solid-svg-icons';
+import {
+    // faEllipsisVertical,
+    faEllipsis,
+} from '@fortawesome/free-solid-svg-icons';
+import { useNavigate } from 'react-router-dom';
 
-function Dropdown({ selected, setSelected }) {
+function Dropdown({ id, deletePost }) {
     const [dropdownShow, setDropdownShow] = useState(false);
-    const options = ['최신순', '오래된순', '조회수'];
 
-    // const handleDropdownClick = () => {
-    //     setDropdownShow(!dropdownShow);
-    // };
+    const options = ['편집', '삭제'];
+
+    const navigate = useNavigate();
+
+    const handleOptions = option => {
+        if (option === '삭제') {
+            deletePost(id);
+        } else {
+            navigate(`/edit/${id}`);
+        }
+    };
 
     return (
         <div className="dropdown">
-            <div
+            <button
                 className="dropdown-btn"
-                role="button"
+                // role="button"
+                type="button"
                 onClick={() => {
                     setDropdownShow(!dropdownShow);
                 }}
             >
-                {selected === '' ? '정렬' : selected}
                 <i>
-                    <FontAwesomeIcon icon={faSortDown} />
+                    <FontAwesomeIcon icon={faEllipsis} />
                 </i>
-            </div>
+            </button>
             {dropdownShow && (
                 <div className="dropdown-options">
                     {options.map(option => (
@@ -35,8 +48,8 @@ function Dropdown({ selected, setSelected }) {
                             className="dropdown-item"
                             role="button"
                             onClick={() => {
-                                setSelected(option);
                                 setDropdownShow(false);
+                                handleOptions(option);
                             }}
                         >
                             {option}

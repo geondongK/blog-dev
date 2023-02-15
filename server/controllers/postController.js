@@ -24,7 +24,7 @@ exports.getById = async (req, res) => {
         const query = 'SELECT * FROM post WHERE id = ?';
         const row = await pool.query(query, [id]);
 
-        res.json(row);
+        res.status(200).json(row);
 
         // res.json([row[0].title, row[0].body]);
     } catch (error) {
@@ -61,6 +61,25 @@ exports.addpost = async (req, res) => {
     }
 };
 
+// 게시물 수정
+exports.editpost = async (req, res) => {
+    try {
+        const id = req.params.id;
+
+        const { title, description } = req.body;
+
+        const query =
+            'UPDATE post SET title = ? , description = ? WHERE id = ?';
+        const row = await pool.query(query, [title, description, id]);
+
+        return res.status(200).json({
+            row: row,
+        });
+    } catch (error) {
+        res.json({ error: error.message });
+    }
+};
+
 // 게시물삭제.
 exports.deletePost = async (req, res) => {
     const { postId } = req.body;
@@ -68,7 +87,7 @@ exports.deletePost = async (req, res) => {
     try {
         const query = 'DELETE FROM post WHERE id = ?';
         const row = await pool.query(query, [postId]);
-        res.json(row);
+        res.status(200).json('게시물 삭제완료.');
     } catch (error) {
         res.json({ error: error.message });
     }
@@ -76,12 +95,26 @@ exports.deletePost = async (req, res) => {
 
 // 조회수.
 exports.addView = async (req, res) => {
-    const id = req.params.id;
+    const { id } = req.body;
+    // console.log(id);
 
     try {
         const query = 'UPDATE post SET view = view + 1 WHERE id = ?';
         const row = await pool.query(query, [id]);
-        res.json({ success: true });
+        res.status(200).json('Add view');
+    } catch (error) {
+        res.json({ error: error.message });
+    }
+};
+
+// 검색.
+exports.search = async (req, res) => {
+    const search = req.query.q;
+
+    try {
+        const query = 'SELECT * FROM post WHERE title LIKE ?';
+        const row = await pool.query(query, ['%' + search + '%']);
+        res.status(200).json(row);
     } catch (error) {
         res.json({ error: error.message });
     }
@@ -100,16 +133,3 @@ exports.addView = async (req, res) => {
 //         res.json({ error: error.message });
 //     }
 // };
-
-// 검색.
-exports.search = async (req, res) => {
-    const search = req.query.q;
-
-    try {
-        const query = 'SELECT * FROM post WHERE title LIKE ?';
-        const row = await pool.query(query, ['%' + search + '%']);
-        res.json(row);
-    } catch (error) {
-        res.json({ error: error.message });
-    }
-};

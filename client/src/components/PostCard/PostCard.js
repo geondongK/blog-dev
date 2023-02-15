@@ -1,12 +1,21 @@
 /* eslint-disable react/prop-types */
-/*  eslint-disable */
-import React from 'react';
-
+/* eslint-disable */
+// profilecard 공용으로 사용하기 위해 따로 분류함.
+import React, { useEffect, useState } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+    faEllipsisVertical,
+    faEllipsis,
+} from '@fortawesome/free-solid-svg-icons';
 import moment from 'moment';
 import 'moment/locale/ko';
 import { ReactComponent as Avatar } from '../../assets/images/avatar.svg';
+import Dropdown from './Dropdown';
+import customAxios from '../../libs/api/axios';
 
-function PostCard({ name, date }) {
+function PostCard({ id, name, date, deletePost }) {
+    // const handleEditPost = postId => {};
+
     return (
         <div className="postcard-header">
             <div className="postcard-info">
@@ -21,6 +30,9 @@ function PostCard({ name, date }) {
                         {moment(date, 'YYYY.MM.DD HH:mm:ss').fromNow()}
                     </span>
                 </div>
+                <Dropdown id={id} deletePost={deletePost} />
+
+                {/* <Dropdown /> */}
             </div>
         </div>
     );
