@@ -1,14 +1,13 @@
 /* eslint-disable no-console */
-/* eslint-disable */
-// import './App.css';
-// import React, { Suspense, lazy } from 'react';
+//  eslint-disable
+
 import React, { useEffect } from 'react';
 import './index.scss';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-// import { useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import customAxios from './libs/api/axios';
+import { loginSuccess } from './redux/slices/userSlice';
 import './sass/main.scss';
-// import { login } from './redux/slices/userSlice';
 
 // components
 import Navbar from './components/NavBar';
@@ -21,18 +20,9 @@ import Post from './pages/PostPage';
 import AddPost from './pages/AddPost';
 import EditPost from './pages/EditPost';
 import Search from './pages/SearchPage';
-// import NewPost from './pages/NewPostPage';
-// import Blog from './pages/PostPage';
-// import MainPage from './pages/MainPage';
-// import NotFound from './pages/NotFoundPage';
-// 다시 시작
-// const Feed = lazy(() => import('./components/layout/Feed'));
-// import Loading from './components/Loading';
 
 function App() {
-    // const dispatch = useDispatch();
-
-    // const [isLoading, setIsLoading] = useState(true);
+    const dispatch = useDispatch();
 
     useEffect(() => {
         customAxios
@@ -40,13 +30,8 @@ function App() {
             .then(response => {
                 // console.log(response.data);
                 if (response.data.snsLoginSuccess === true) {
-                    // dispatch(
-                    //     login({
-                    //         id: response.data.id,
-                    //         name: response.data.name,
-                    //         isLoggedIn: true,
-                    //     }),
-                    // );
+                    console.log(response.data);
+                    dispatch(loginSuccess(response.data));
                 }
             })
             .catch(() => {

@@ -52,7 +52,6 @@ function LoginPage() {
                     console.log(response.data);
                 } else {
                     // 로그인 정보 저장.
-                    console.log();
                     dispatch(loginSuccess(response.data));
                     navigate('/');
                 }

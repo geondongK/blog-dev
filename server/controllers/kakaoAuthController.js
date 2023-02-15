@@ -19,7 +19,10 @@ exports.kakaoToken = async (req, res, next) => {
         const decoded = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
 
         // console.log(decoded.id);
-        res.json({ snsLoginSuccess: true, id: decoded.id, name: decoded.name });
+        res.json({
+            snsLoginSuccess: true,
+            user: { id: decoded.id, name: decoded.name },
+        });
     } catch (error) {
         // TokenExpiredError
         // 기간 만료
