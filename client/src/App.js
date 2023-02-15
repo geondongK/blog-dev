@@ -4,15 +4,15 @@
 // import React, { Suspense, lazy } from 'react';
 import React, { useEffect } from 'react';
 import './index.scss';
-import Navbar from './components/NavBar';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 // import { useDispatch } from 'react-redux';
 import customAxios from './libs/api/axios';
 import './sass/main.scss';
 // import { login } from './redux/slices/userSlice';
 
-// import Feed from './components/layout/Feed';
-// import Footer from './components/Footer';
+// components
+import Navbar from './components/NavBar';
+import Footer from './components/Footer';
 // Pages
 import Home from './pages/HomePage';
 import Login from './pages/LoginPage';
@@ -72,6 +72,7 @@ function App() {
                 <Route path="/post/:id" element={<Blog />} />
                 <Route path="/*" element={<NotFound />} />  */}
             </Routes>
+            <Footer />
             {/* )} */}
             {/* <Routes>
                     <Route path="/" element={<Home />} />
