@@ -12,6 +12,7 @@ import './sass/main.scss';
 // components
 import Navbar from './components/NavBar';
 import Footer from './components/Footer';
+// import Loading from './components/Loading';
 // Pages
 import Home from './pages/HomePage';
 import Login from './pages/LoginPage';
@@ -44,6 +45,7 @@ function App() {
             {/* <Box sx={{ paddingBottom: '5rem' }}> */}
             {/* <Layout> */}
             <Navbar />
+            {/* <Loading /> */}
             <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/login" element={<Login />} />

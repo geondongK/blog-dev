@@ -6,9 +6,12 @@ const moment = require('moment');
 // 게시물 리스트
 exports.postList = async (req, res) => {
     try {
-        const query = `SELECT * FROM post ORDER BY id DESC`;
-        const row = await pool.query(query);
+        const { limit, offset } = req.query;
+
+        const query = `SELECT * FROM post ORDER BY id DESC LIMIT ? OFFSET ? `;
+        const row = await pool.query(query, [Number(limit), Number(offset)]);
         res.status(200).json(row);
+
         // res.json({ success: ture, row: row });
     } catch (error) {
         res.json({ error: error.message });

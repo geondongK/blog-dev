@@ -1,12 +1,21 @@
 /* eslint-disable no-console */
-import React, { useEffect, useState } from 'react';
+/* eslint-disable */
+// react map Infinite Scroll , Intersection Observer
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import customAxios from '../libs/api/axios';
 import PostsCard from '../components/PostCard/PostsCard';
-// import Dropdown from '../components/PostCard/Dropdown';
+import Loading from '../components/Loading';
 
 function HomePage() {
-    // 게시물 출력.
     const [posts, setPosts] = useState([]);
+    const [hasNextPage, setHasNextPage] = useState(true);
+    const [loading, setLoading] = useState(true);
+
+    const observerTargetEl = useRef(null);
+    const page = useRef(0);
+
+    // const [page, setPage] = useState(0);
+    // const [loading, setLoading] = useState(true);
 
     // 게시물 삭제 기능.
     const deletePost = async postId => {
@@ -57,13 +66,38 @@ function HomePage() {
         }
     };
 
-    useEffect(() => {
-        const fetchPost = async () => {
-            const response = await customAxios.get('/post/postlist');
-            setPosts(response.data);
-        };
-        fetchPost();
+    const fetch = useCallback(async () => {
+        try {
+            const { data } = await customAxios.get(
+                `/post/postlist?limit=10&offset=${page.current}`,
+            );
+            setPosts(prevPosts => [...prevPosts, ...data]);
+            setHasNextPage(data.length === 10);
+
+            if (data.length) {
+                page.current += 10;
+            }
+        } catch (err) {
+            console.error(err);
+        }
     }, []);
+
+    useEffect(() => {
+        if (!observerTargetEl.current || !hasNextPage) {
+            setLoading(false);
+            return;
+        }
+        const io = new IntersectionObserver((entries, observer) => {
+            if (entries[0].isIntersecting) {
+                fetch();
+            }
+        });
+        io.observe(observerTargetEl.current);
+
+        return () => {
+            io.disconnect();
+        };
+    }, [fetch, hasNextPage]);
 
     return (
         <div className="home">
@@ -94,9 +128,15 @@ function HomePage() {
                     조회수
                 </button>
             </div>
-            {posts.map(post => (
+            {/* {loading && <Loading />} */}
+            {/* {posts.map(post => (
                 <PostsCard post={post} key={post.id} deletePost={deletePost} />
+            ))} */}
+            {posts.map(post => (
+                <PostsCard key={post.id} post={post} deletePost={deletePost} />
             ))}
+            <div ref={observerTargetEl}></div>
+            {loading && <Loading />}
         </div>
     );
 }

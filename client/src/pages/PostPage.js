@@ -1,13 +1,15 @@
-/*  eslint-disable */
+/* eslint-disable no-console */
+/* eslint-disable */
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import moment from 'moment';
 import Postcontent from '../components/PostContent/postContent';
 import PostComments from '../components/commtents/Comment';
 import PostCommentForm from '../components/commtents/CommentForm';
 import customAxios from '../libs/api/axios';
 import authContext from '../libs/api/AuthContext';
-import moment from 'moment';
+import Loading from '../components/Loading';
 import 'moment/locale/ko';
 
 function PostPage() {
@@ -17,6 +19,8 @@ function PostPage() {
     const [postComments, setPostComments] = useState([]);
     // 답글 작성 및 편집.
     const [activeComment, setActiveComment] = useState(null);
+
+    const [loading, setLoading] = useState(true);
 
     // 현재시간.
     const nowTime = moment().format('YYYY-MM-DD HH:mm:ss');
@@ -118,11 +122,14 @@ function PostPage() {
         };
         fetchPost();
         fetchComments();
+        setLoading(false);
     }, []);
 
     return (
         <div className="post">
             <div className="post-container">
+                {loading && <Loading />}
+
                 {postcontents.map(postcontent => (
                     <Postcontent
                         postcontent={postcontent}

@@ -14,15 +14,13 @@ import { store, persistor } from './redux/store/store';
 // 아래와 같이 수정.
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-    <React.StrictMode>
-        <Provider store={store}>
-            <PersistGate loading={null} persistor={persistor}>
-                {/* <ThemeProvider theme={theme}> */}
-                <App />
-                {/* </ThemeProvider> */}
-            </PersistGate>
-        </Provider>
-    </React.StrictMode>,
+    <Provider store={store}>
+        <PersistGate loading={null} persistor={persistor}>
+            {/* <ThemeProvider theme={theme}> */}
+            <App />
+            {/* </ThemeProvider> */}
+        </PersistGate>
+    </Provider>,
 );
 
 // App 시작부분
