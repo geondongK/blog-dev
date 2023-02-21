@@ -1,15 +1,15 @@
-/* eslint-disable no-console */
 /* eslint-disable react/prop-types */
-//  eslint-disable
+/*  eslint-disable */
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-// , faUser
-import { faEye, faComment } from '@fortawesome/free-regular-svg-icons';
+import { faEye, faCommentDots } from '@fortawesome/free-regular-svg-icons';
 import { Link } from 'react-router-dom';
 import PostCard from './PostCard';
 import customAxios from '../../libs/api/axios';
 
 function PostsCard({ post, deletePost }) {
+    // 좋아요 개수.
+
     // 게시물 조회 업데이트.
     const handleViewClick = postId => {
         customAxios
@@ -29,6 +29,7 @@ function PostsCard({ post, deletePost }) {
             <div className="postcard-container">
                 <PostCard
                     id={post.id}
+                    userId={post.userId}
                     name={post.name}
                     date={post.createDate}
                     deletePost={deletePost}
@@ -46,14 +47,10 @@ function PostsCard({ post, deletePost }) {
                     </h4>
                 </div>
                 <div className="postscard-footer">
-                    <div className="postcard-view-icon">
-                        <FontAwesomeIcon icon={faEye} />
-                        <span>{post.view}</span>
-                    </div>
-                    <div className="postscard-comment-icon">
-                        <FontAwesomeIcon icon={faComment} />
-                        <span>{post.view}</span>
-                    </div>
+                    <FontAwesomeIcon icon={faEye} />
+                    <span>{post.view}</span>
+                    <FontAwesomeIcon icon={faCommentDots} />
+                    <span>{post.view}</span>
                 </div>
             </div>
         </div>

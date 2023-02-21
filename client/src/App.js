@@ -1,6 +1,5 @@
 /* eslint-disable no-console */
 //  eslint-disable
-
 import React, { useEffect } from 'react';
 import './index.scss';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
@@ -42,10 +41,7 @@ function App() {
 
     return (
         <BrowserRouter>
-            {/* <Box sx={{ paddingBottom: '5rem' }}> */}
-            {/* <Layout> */}
             <Navbar />
-            {/* <Loading /> */}
             <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/login" element={<Login />} />
@@ -55,24 +51,8 @@ function App() {
                 <Route path="/search" element={<Search />} />
                 <Route path="/add" element={<AddPost />} />
                 <Route path="/edit/:id" element={<EditPost />} />
-                {/* <Route path="/post" element={<NewPost />} />
-                <Route path="/post/:id" element={<Blog />} />
-                <Route path="/*" element={<NotFound />} />  */}
             </Routes>
             <Footer />
-            {/* )} */}
-            {/* <Routes>
-                    <Route path="/" element={<Home />} />
-                    <Route path="/login" element={<Login />} />
-                    <Route path="/signup" element={<SignUp />} />
-                    <Route path="/post" element={<NewPost />} />
-                    <Route path="/post/:id" element={<Blog />} />
-                    <Route path="/*" element={<NotFound />} />
-                </Routes> */}
-            {/* <Footer /> */}
-            {/* </Stack> */}
-            {/* </Box> */}
-            {/* </Layout> */}
         </BrowserRouter>
     );
 }

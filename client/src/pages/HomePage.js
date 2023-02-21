@@ -1,21 +1,18 @@
-/* eslint-disable no-console */
-/* eslint-disable */
-// react map Infinite Scroll , Intersection Observer
+//  eslint-disable
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import customAxios from '../libs/api/axios';
 import PostsCard from '../components/PostCard/PostsCard';
 import Loading from '../components/Loading';
 
 function HomePage() {
+    // 게시물 출력
     const [posts, setPosts] = useState([]);
+    // 다음 페이지 여부 확인.
     const [hasNextPage, setHasNextPage] = useState(true);
     const [loading, setLoading] = useState(true);
 
     const observerTargetEl = useRef(null);
     const page = useRef(0);
-
-    // const [page, setPage] = useState(0);
-    // const [loading, setLoading] = useState(true);
 
     // 게시물 삭제 기능.
     const deletePost = async postId => {
@@ -37,6 +34,7 @@ function HomePage() {
         }
     };
 
+    // 정렬기능.
     const handleChangeValue = sort => {
         // 최신
         if (sort === 'desc') {
@@ -66,6 +64,7 @@ function HomePage() {
         }
     };
 
+    // 게시물 무한 스크롤 기능.
     const fetch = useCallback(async () => {
         try {
             const { data } = await customAxios.get(
@@ -77,8 +76,8 @@ function HomePage() {
             if (data.length) {
                 page.current += 10;
             }
-        } catch (err) {
-            console.error(err);
+        } catch (error) {
+            // console.log(error);
         }
     }, []);
 
@@ -87,22 +86,21 @@ function HomePage() {
             setLoading(false);
             return;
         }
-        const io = new IntersectionObserver((entries, observer) => {
+        const io = new IntersectionObserver(entries => {
             if (entries[0].isIntersecting) {
                 fetch();
             }
         });
         io.observe(observerTargetEl.current);
 
-        return () => {
-            io.disconnect();
-        };
+        // return () => {
+        //     io.disconnect();
+        // };
     }, [fetch, hasNextPage]);
 
     return (
         <div className="home">
-            {/* <Dropdown selected={selected} setSelected={setSelected} /> */}
-            <div>
+            <div className="sort-button">
                 <button
                     type="button"
                     onClick={() => {
@@ -128,15 +126,12 @@ function HomePage() {
                     조회수
                 </button>
             </div>
-            {/* {loading && <Loading />} */}
-            {/* {posts.map(post => (
-                <PostsCard post={post} key={post.id} deletePost={deletePost} />
-            ))} */}
             {posts.map(post => (
                 <PostsCard key={post.id} post={post} deletePost={deletePost} />
             ))}
-            <div ref={observerTargetEl}></div>
-            {loading && <Loading />}
+            <div className="observer-loading" ref={observerTargetEl}>
+                {loading && <Loading />}
+            </div>
         </div>
     );
 }

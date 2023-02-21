@@ -1,6 +1,30 @@
 .home {
-    background-color: $base-bg-color;
     height: 100%;
-    width: 100%;
+    // width: 100%;
     padding: 0 20%;
+    margin-top: 10px;
+    @include sm {
+        padding: 0 3%;
+    }
+
+    .sort-button {
+        display: flex;
+        justify-content: right;
+
+        button {
+            @include btn;
+            font-weight: bold;
+            font-size: $base-font-size;
+            margin-left: 5px;
+            color: #9e9e9e;
+            &:hover {
+                color: black;
+            }
+        }
+    }
+
+    .observer-loading {
+        display: flex;
+        justify-content: center;
+    }
 }

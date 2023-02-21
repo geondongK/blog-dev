@@ -112,14 +112,6 @@
             text-align: right;
             font-size: $base-font-size;
             font-weight: bold;
-
-            a {
-                color: black;
-                text-decoration-line: none;
-                &:visited {
-                    text-decoration: none;
-                }
-            }
         }
     }
 }

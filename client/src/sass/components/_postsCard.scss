@@ -1,7 +1,4 @@
 .postscard {
-    // background-color: white;
-    // padding: $base-padding;
-    // border-radius: $base-border-radius;
     margin-top: 10px;
     background-color: white;
     padding: $base-padding;
@@ -11,17 +8,17 @@
     .postcard-container {
         padding: 10px;
 
+        .postscard-body {
+            margin-top: 5px;
+        }
+
         .postscard-footer {
             display: flex;
+            align-items: center;
+            margin-top: 10px;
+            gap: 5px;
             font-weight: bold;
-            // font-size: $base-font-sm;
-            gap: 10px;
-
-            span {
-                justify-items: center;
-                align-items: center;
-                margin-left: 5px;
-            }
+            font-size: $base-font-sm;
         }
     }
 }
