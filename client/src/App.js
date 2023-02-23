@@ -10,7 +10,7 @@ import './sass/main.scss';
 
 // components
 import Navbar from './components/NavBar';
-import Footer from './components/Footer';
+import Footer from './components/Footer/Footer';
 // import Loading from './components/Loading';
 // Pages
 import Home from './pages/HomePage';
