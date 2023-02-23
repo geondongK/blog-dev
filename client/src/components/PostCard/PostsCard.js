@@ -40,7 +40,7 @@ function PostsCard({ post, deletePost }) {
                             onClick={() => {
                                 handleViewClick(post.id);
                             }}
-                            to={`post/${post.id}`}
+                            to={`/post/${post.id}`}
                         >
                             {post.title}
                         </Link>
