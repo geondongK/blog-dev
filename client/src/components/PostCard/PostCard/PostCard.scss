@@ -1,0 +1,34 @@
+@import '../../../sass//main.scss';
+
+.postcard-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .postcard-info {
+        display: flex;
+        gap: 7px;
+        justify-items: center;
+        align-items: center;
+
+        .postcard-info-img {
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .postcard-info-details {
+            display: flex;
+            flex-direction: column;
+
+            .postcard-name {
+                font-weight: bold;
+                font-size: $base-font-sm;
+            }
+
+            .postcard-date {
+                font-size: $base-font-sm;
+                color: #9e9e9e;
+            }
+        }
+    }
+}

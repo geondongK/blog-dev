@@ -1,0 +1,232 @@
+@import '../../sass/main.scss';
+
+.errorsMessage {
+    color: $base-error-color;
+}
+
+.login-container {
+    position: relative;
+    width: 100%;
+    height: calc(100vh - $base-navbar-height);
+    background-color: $base-bg-color;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .login-wrapper {
+        width: 500px;
+        background: #ffffff;
+        border-radius: $base-border-radius * 2.5;
+        background-color: white;
+        border: 1px solid $base-main-color;
+        padding: 50px 40px;
+        @include sm {
+            width: 100%;
+            height: calc(100vh - $base-navbar-height);
+            padding: 15px 10px;
+        }
+
+        // padding: 40px 50px;
+        // border-radius: 10px;
+        // display: flex;
+        // justify-content: center;
+        // flex-direction: column;
+        // @include md {
+        //     padding: 10px;
+        // }
+
+        .login-title {
+            color: black;
+            font-weight: bold;
+            font-size: $base-font-lg;
+            margin-bottom: 10px;
+        }
+
+        hr {
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+
+        .socialLogin-kakao {
+            border: 1px solid black;
+            border-radius: 4px;
+            width: 100%;
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background-color: transparent;
+            cursor: pointer;
+
+            span {
+                font-weight: bold;
+                font-size: $base-font-size;
+            }
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            // padding: 40px 50px;
+            width: 100%;
+
+            .login-input {
+                position: relative;
+                width: 100%;
+
+                input {
+                    display: block;
+                    width: 100%;
+                    padding: 10px;
+                    height: 40px;
+                    border: 1px solid black;
+                    border-radius: $base-border-radius;
+                    &:active {
+                        border: 1px solid #1a237e;
+                    }
+                    // @include mobile {
+                    //     width: 400px;
+                    // }
+                }
+
+                p {
+                    margin-bottom: 3px;
+                }
+            }
+
+            button {
+                display: inline-block;
+                background-color: #3d5afe;
+                color: white;
+                padding: 10px;
+                font-weight: bold;
+                border: none;
+                border-radius: $base-border-radius;
+                cursor: pointer;
+                &:hover {
+                    background-color: #303f9f;
+                }
+            }
+        }
+
+        .link {
+            margin-top: 5px;
+            text-align: right;
+            font-size: $base-font-size;
+            font-weight: bold;
+        }
+    }
+}
+
+// .errorsMessage {
+//     color: red;
+// }
+
+// .login-container {
+//     position: relative;
+//     width: 100%;
+//     min-height: 100vh;
+//     background-color: #eee;
+//     display: flex;
+//     align-items: center;
+//     justify-content: center;
+//     // @include md {
+//     // align-items: baseline;
+//     // }
+
+//     .socialLogin-kakao {
+//         border: 1px solid black;
+//         border-radius: 4px;
+//         padding: 10px;
+//         display: flex;
+//         align-items: center;
+//         gap: 10px;
+//         background-color: transparent;
+//         cursor: pointer;
+
+//         span {
+//             font-weight: bold;
+//             font-size: $base-font-size;
+//         }
+//     }
+
+//     .login-form {
+//         background-color: white;
+//         padding: 40px 50px;
+//         border-radius: 10px;
+//         display: flex;
+//         justify-content: center;
+//         flex-direction: column;
+//         gap: 10px;
+//         // @include md {
+//         //     padding: 10px;
+//         // }
+
+//         .link {
+//             text-align: right;
+//             font-size: $base-font-size;
+//             font-weight: bold;
+
+//             a {
+//                 color: black;
+//                 text-decoration-line: none;
+//                 &:visited {
+//                     text-decoration: none;
+//                 }
+//             }
+//         }
+
+//         .login-title {
+//             color: black;
+//             font-weight: bold;
+//             font-size: 24px;
+//         }
+
+//         form {
+//             display: flex;
+//             flex-direction: column;
+//             gap: 10px;
+//             // width: 400px;
+//             width: 100%;
+//             // width: 100vw;
+
+//             .login-input {
+//                 position: relative;
+//                 width: 100%;
+
+//                 input {
+//                     // max-width: 400px;
+//                     // height: 35px;
+//                     width: 100%;
+//                     padding: 10px;
+//                     border: 1px solid black;
+//                     border-radius: 4px;
+//                     &:active {
+//                         border: 1px solid #1a237e;
+//                     }
+//                     // @include mobile {
+//                     //     width: 400px;
+//                     // }
+//                 }
+
+//                 p {
+//                     margin-bottom: 3px;
+//                 }
+//             }
+
+//             button {
+//                 background-color: #3d5afe;
+//                 color: white;
+//                 padding: 10px;
+//                 font-weight: bold;
+//                 border: none;
+//                 border-radius: 4px;
+//                 cursor: pointer;
+//                 &:hover {
+//                     background-color: #303f9f;
+//                 }
+//             }
+//         }
+//     }
+// }

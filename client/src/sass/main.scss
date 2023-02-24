@@ -1,29 +1,3 @@
 // variables & functions
 @import './absctracts/variables';
 @import './absctracts/mixins';
-
-// base & layout
-@import 'layout/navbar.scss';
-// colors
-
-// components
-@import 'components/postsCard';
-@import 'components/postCard';
-@import 'components/dropdown';
-@import 'components/postContent';
-@import 'components/comments';
-@import 'components/commentsForm';
-@import 'components/comment';
-@import 'components/commentForm';
-@import 'components/nestedComments';
-@import 'components/textEditor';
-@import 'components/loading';
-
-// pages
-@import 'pages/home';
-@import 'pages/login';
-@import 'pages/register';
-@import 'pages/post';
-@import 'pages/addpost';
-@import 'pages/search';
-// utilities (maring, padding)

@@ -1,12 +1,13 @@
 /* eslint-disable react/no-danger */
-//  eslint-disable
+// eslint-disable
+import './PostContent.scss';
 import React from 'react';
 import moment from 'moment';
 import 'moment/locale/ko';
 import Dompurify from 'dompurify';
 import { ReactComponent as Avatar } from '../../assets/images/avatar.svg';
 
-function postContent({ postcontent, description }) {
+function PostContent({ postcontent, description }) {
     return (
         <div className="postcontent">
             <div className="postcontent-card">
@@ -20,7 +21,7 @@ function postContent({ postcontent, description }) {
                         <div className="postcard-info-details">
                             <span>{postcontent.name}</span>
                             <span>
-                                {moment(postContent.creatDate).format(
+                                {moment(postcontent.creatDate).format(
                                     'YYYY년 M월 D일',
                                 )}
                             </span>
@@ -40,4 +41,4 @@ function postContent({ postcontent, description }) {
     );
 }
 
-export default postContent;
+export default PostContent;

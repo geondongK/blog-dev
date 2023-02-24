@@ -9,17 +9,17 @@ import { loginSuccess } from './redux/slices/userSlice';
 import './sass/main.scss';
 
 // components
-import Navbar from './components/NavBar';
+import Navbar from './components/Navbar/Navbar';
 import Footer from './components/Footer/Footer';
 // import Loading from './components/Loading';
 // Pages
-import Home from './pages/HomePage';
-import Login from './pages/LoginPage';
-import Register from './pages/RegisterPage';
-import Post from './pages/PostPage';
-import AddPost from './pages/AddPost';
+import Home from './pages/Home/Home';
+import Login from './pages/Login/LoginPage';
+import Register from './pages/Register/RegisterPage';
+import Post from './pages/Post/Post';
+import AddPost from './pages/AddPost/AddPost';
 import EditPost from './pages/EditPost';
-import Search from './pages/SearchPage';
+import Search from './pages/Search/SearchPage';
 
 function App() {
     const dispatch = useDispatch();
