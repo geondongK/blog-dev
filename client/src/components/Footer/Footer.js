@@ -3,10 +3,10 @@ import './Footer.scss';
 
 function Footer() {
     return (
-        <div className="container">
-            <h3 className="copyright">
+        <div className="footer">
+            <h4 className="footer-copyright">
                 © {new Date().getFullYear()}. kimgeondong All rights reserved.
-            </h3>
+            </h4>
         </div>
     );
 }

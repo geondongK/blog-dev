@@ -1,7 +1,6 @@
-//   eslint-disable
 /* eslint-disable react/jsx-props-no-spreading */
-/* eslint-disable no-console */
-import './Login.scss';
+// eslint-disable
+import '../auth.scss';
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
@@ -9,9 +8,9 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { useDispatch } from 'react-redux';
-import { loginSuccess } from '../../redux/slices/userSlice';
-import { ReactComponent as KaKaoIcon } from '../../assets/images/kakaoLogin.svg';
-import customAxios from '../../libs/api/axios';
+import { loginSuccess } from '../../../redux/slices/userSlice';
+import { ReactComponent as KaKaoIcon } from '../../../assets/images/kakaoLogin.svg';
+import customAxios from '../../../libs/api/axios';
 
 function Login() {
     const dispatch = useDispatch();
@@ -39,7 +38,7 @@ function Login() {
             email: '',
             password: '',
         },
-        mode: 'onChange',
+        mode: 'onSubmit',
     });
 
     const onSubmit = values => {
@@ -50,7 +49,6 @@ function Login() {
                 if (response.data.error) {
                     setHandleLogin(true);
                     setLoginMessage(response.data.error);
-                    console.log(response.data);
                 } else {
                     // 로그인 정보 저장.
                     dispatch(loginSuccess(response.data));
@@ -71,9 +69,9 @@ function Login() {
     };
 
     return (
-        <div className="login-container">
-            <div className="login-wrapper">
-                <div className="login-title">
+        <div className="auth">
+            <div className="wrapper">
+                <div className="auth-title">
                     <span>로그인</span>
                 </div>
                 <button
@@ -81,7 +79,7 @@ function Login() {
                         kakaoLogin();
                     }}
                     type="button"
-                    className="socialLogin-kakao"
+                    className="socialAuth-kakao"
                 >
                     <KaKaoIcon width="30px" height="30px" />
                     <span>카카오 로그인</span>
@@ -93,7 +91,7 @@ function Login() {
                     autoComplete="off"
                     onSubmit={handleSubmit(onSubmit)}
                 >
-                    <div className="login-input">
+                    <div className="auth-input">
                         <p>이메일</p>
                         <input
                             type="email"
@@ -101,7 +99,6 @@ function Login() {
                             name="email"
                             placeholder="이메일"
                             {...register('email')}
-                            // {...register('email', { required: true })}
                             onClick={() => {
                                 setHandleLogin(false);
                             }}
@@ -112,7 +109,7 @@ function Login() {
                             </span>
                         )}
                     </div>
-                    <div className="login-input">
+                    <div className="auth-input">
                         <p>비밀번호</p>
                         <input
                             type="password"
@@ -124,7 +121,7 @@ function Login() {
                                 setHandleLogin(false);
                             }}
                         />
-                        {errors.password && (
+                        {!errors.password ? null : (
                             <span className="errorsMessage">
                                 {errors.password.message}
                             </span>

@@ -69,7 +69,7 @@ exports.login = async (req, res) => {
 exports.register = async (req, res) => {
     try {
         const { name, email, password, passwordConfirm } = req.body;
-        // console.log(email);
+
         const query = 'SELECT * FROM user';
         const row = await pool.query(query);
 
@@ -131,8 +131,6 @@ exports.refreshToken = async (req, res) => {
 
         const token = req.cookies.token;
 
-        // console.log(token);
-
         // const token = req.headers.authorization.split('Bearer ')[1];
 
         if (!token)
@@ -143,7 +141,7 @@ exports.refreshToken = async (req, res) => {
             let refreshToken = null;
             // accessToken 검증
             const accessToken = AccessVerify(token);
-            // console.log(accessToken);
+
             if (accessToken === 'jwt expired') {
                 const userInfo = jwt.decode(
                     token,
@@ -158,7 +156,6 @@ exports.refreshToken = async (req, res) => {
                 }
                 // SNS, 내부가입 따로 분리.
                 if (refreshToken === 'jwt expired') {
-                    // console.log(refreshToken);
                     res.status(403).json({
                         isLoggedIn: false,
                         refreshTokenTimeOut: true,

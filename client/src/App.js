@@ -14,8 +14,8 @@ import Footer from './components/Footer/Footer';
 // import Loading from './components/Loading';
 // Pages
 import Home from './pages/Home/Home';
-import Login from './pages/Login/LoginPage';
-import Register from './pages/Register/RegisterPage';
+import Login from './pages/Auth/Login/Login';
+import Register from './pages/Auth/Register/Register';
 import Post from './pages/Post/Post';
 import AddPost from './pages/AddPost/AddPost';
 import EditPost from './pages/EditPost';
