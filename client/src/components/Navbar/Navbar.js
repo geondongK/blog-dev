@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable no-console */
-//  eslint-disable
+/* eslint-disable */
 import './Navbar.scss';
 import React, { useEffect, useRef, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
@@ -142,7 +142,7 @@ function Navbar() {
                             글작성
                         </button>
                     </Link>
-
+                    <hr />
                     <button
                         onClick={() => {
                             handleLogout();
@@ -163,7 +163,11 @@ function Navbar() {
             )}
             {!checkedRef.current.checked ? (
                 <label htmlFor="nav-menu">
-                    <FontAwesomeIcon icon={faBars} />
+                    {!currentUser ? (
+                        <FontAwesomeIcon icon={faBars} />
+                    ) : (
+                        <h4>{currentUser.user.name}</h4>
+                    )}
                 </label>
             ) : (
                 <label htmlFor="nav-menu">
