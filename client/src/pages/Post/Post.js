@@ -1,8 +1,7 @@
-/* eslint-disable no-console */
-/* eslint-disable */
+//  eslint-disable
 import './Post.scss';
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import moment from 'moment';
 import Postcontent from '../../components/PostContent/PostContent';
@@ -10,7 +9,7 @@ import PostComments from '../../components/Comments/Comments/Comments';
 import PostCommentForm from '../../components/Comments/CommentForm/CommentForm';
 import customAxios from '../../libs/api/axios';
 import authContext from '../../libs/api/AuthContext';
-import Loading from '../../components/Loading/Loading';
+// import Loading from '../../components/Loading/Loading';
 import 'moment/locale/ko';
 
 function Post() {
@@ -21,7 +20,7 @@ function Post() {
     // 답글 작성 및 편집.
     const [activeComment, setActiveComment] = useState(null);
 
-    const [loading, setLoading] = useState(true);
+    // const [loading, setLoading] = useState(true);
 
     // 현재시간.
     const nowTime = moment().format('YYYY-MM-DD HH:mm:ss');
@@ -65,20 +64,20 @@ function Post() {
 
     // 댓글 & 답글 수정 기능
     const editComment = async (newComment, commentId) => {
-        await customAxios
+        await authContext
             .put(`/comment`, {
                 newComment,
                 commentId,
             })
             .then(() => {
-                const updateComments = postComments.map(postComment => {
-                    if (postComment.id === commentId) {
+                const updateComments = postComments.map(updateComment => {
+                    if (updateComment.id === commentId) {
                         return {
-                            ...postComment,
+                            ...updateComment,
                             description: newComment,
                         };
                     }
-                    return postComment;
+                    return updateComment;
                 });
                 setPostComments(updateComments);
                 setActiveComment(null);
@@ -92,7 +91,7 @@ function Post() {
     const deleteComment = async commentId => {
         // eslint-disable-next-line no-alert
         if (window.confirm('댓글을 삭제하시겠습니까?')) {
-            await customAxios
+            await authContext
                 .delete(`/comment`, {
                     data: {
                         commentId,
@@ -100,7 +99,7 @@ function Post() {
                 })
                 .then(() => {
                     const newComments = postComments.filter(
-                        postComment => postComment.id !== commentId,
+                        newComment => newComment.id !== commentId,
                     );
                     setPostComments(newComments);
                 })
@@ -123,14 +122,12 @@ function Post() {
         };
         fetchPost();
         fetchComments();
-        setLoading(false);
+        // setLoading(false);
     }, []);
 
     return (
         <div className="post">
-            <div className="post-container">
-                {loading && <Loading />}
-
+            <div className="container">
                 {postcontents.map(postcontent => (
                     <Postcontent
                         postcontent={postcontent}
@@ -139,7 +136,7 @@ function Post() {
                         key={postcontent.id}
                     />
                 ))}
-                {/* <div className="post-comments"> */}
+                <hr className="post-line" />
                 {postComment.map(mainPostComment => (
                     <PostComments
                         key={mainPostComment.id}
@@ -153,18 +150,23 @@ function Post() {
                         setActiveComment={setActiveComment}
                     />
                 ))}
-                {/* </div> */}
-                <div className="post-comment">
-                    <PostCommentForm
-                        submitLabel="댓글달기"
-                        textLabel="댓글 달기"
-                        handleSubmit={newComment => {
-                            addComment(newComment, null);
-                        }}
 
-                        // buttonHidden
-                    />
-                </div>
+                {!currentUser ? (
+                    <h4 className="post-auth">
+                        <Link to="/login">로그인</Link>을 하셔야 댓글을 작성할
+                        수 있습니다
+                    </h4>
+                ) : (
+                    <div className="post-commentForm">
+                        <PostCommentForm
+                            submitLabel="댓글달기"
+                            textLabel="댓글 달기"
+                            handleSubmit={newComment => {
+                                addComment(newComment, null);
+                            }}
+                        />
+                    </div>
+                )}
             </div>
         </div>
     );

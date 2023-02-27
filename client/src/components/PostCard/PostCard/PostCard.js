@@ -1,6 +1,5 @@
 /* eslint-disable react/prop-types */
 //  eslint-disable
-// profilecard 공용으로 사용하기 위해 따로 분류함.
 import './PostCard.scss';
 import React from 'react';
 import moment from 'moment';
@@ -31,7 +30,6 @@ function PostCard({ id, userId, name, date, deletePost }) {
                     height="30px"
                     className="postcard-info-img"
                 />
-
                 <div className="postcard-info-details">
                     <span className="postcard-name">{name}</span>
                     <span className="postcard-date">

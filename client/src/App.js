@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 //  eslint-disable
 import React, { useEffect } from 'react';
 import './index.scss';
@@ -30,7 +29,6 @@ function App() {
             .then(response => {
                 // console.log(response.data);
                 if (response.data.snsLoginSuccess === true) {
-                    console.log(response.data);
                     dispatch(loginSuccess(response.data));
                 }
             })

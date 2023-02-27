@@ -6,7 +6,6 @@ function CommentForm({
     handleSubmit,
     submitLabel,
     textLabel,
-    // buttonHidden,
     handleCancel,
     handleCancelButton = false,
     initialText = '',

@@ -10,28 +10,29 @@ import { ReactComponent as Avatar } from '../../assets/images/avatar.svg';
 function PostContent({ postcontent, description }) {
     return (
         <div className="postcontent">
-            <div className="postcontent-card">
-                <div className="postcard-header">
-                    <div className="postcard-info">
-                        <Avatar
-                            width="30px"
-                            height="30px"
-                            className="postcard-info-img"
-                        />
-                        <div className="postcard-info-details">
-                            <span>{postcontent.name}</span>
-                            <span>
-                                {moment(postcontent.creatDate).format(
-                                    'YYYY년 M월 D일',
-                                )}
-                            </span>
-                        </div>
+            <div className="postcontent-header">
+                <div className="postcontent-info">
+                    <Avatar
+                        width="30px"
+                        height="30px"
+                        className="postcontent-info-img"
+                    />
+                    <div className="postcontent-info-details">
+                        <span className="postcontent-name">
+                            {postcontent.name}
+                        </span>
+                        <span className="postcontent-date">
+                            {moment(postcontent.creatDate).format(
+                                'YYYY년 M월 D일',
+                            )}
+                        </span>
                     </div>
                 </div>
             </div>
-            <hr />
-            <h2>{postcontent.title}</h2>
-            <hr />
+
+            <div className="postcontent-title">
+                <h3>{postcontent.title}</h3>
+            </div>
             <p
                 dangerouslySetInnerHTML={{
                     __html: Dompurify.sanitize(description),

@@ -1,5 +1,5 @@
-/* eslint-disable react/prop-types */
-//   eslint-disable
+// eslint-disable
+import './NestedComment.scss';
 import React, { useEffect, useState } from 'react';
 import moment from 'moment';
 import 'moment/locale/ko';
@@ -11,6 +11,7 @@ import { useParams } from 'react-router-dom';
 import CommentForm from '../CommentForm/CommentForm';
 import customAxios from '../../../libs/api/axios';
 import { ReactComponent as Avatar } from '../../../assets/images/avatar.svg';
+import CommentDropdown from '../Dropdown/CommentDropdown';
 
 function NestedComment({
     commentId,
@@ -75,43 +76,17 @@ function NestedComment({
             });
     };
 
-    function editButtonComponent() {
+    function dropdownComponent() {
         if (currentUser !== null) {
             if (userId === currentUser.user.id) {
                 return (
-                    <div>
-                        <button
-                            type="button"
-                            onClick={() => {
-                                setActiveComment({
-                                    id: commentId,
-                                    type: 'editing',
-                                });
-                            }}
-                        >
-                            수정
-                        </button>
-                        {isEditing && (
-                            <CommentForm
-                                submitLabel="댓글 수정"
-                                textLabel="수정"
-                                handleCancelButton
-                                initialText={description}
-                                handleSubmit={newComment => {
-                                    editComment(newComment, commentId);
-                                }}
-                                handleCancel={() => setActiveComment(null)}
-                            />
-                        )}
-                        <button
-                            onClick={() => {
-                                deleteComment(commentId);
-                            }}
-                            type="button"
-                        >
-                            삭제
-                        </button>
-                    </div>
+                    <CommentDropdown
+                        commentId={commentId}
+                        deleteComment={deleteComment}
+                        activeComment={activeComment}
+                        setActiveComment={setActiveComment}
+                        editComment={editComment}
+                    />
                 );
             }
             return null;
@@ -165,26 +140,42 @@ function NestedComment({
     // const user = liked.userId;
 
     return (
-        <div className="nestedcomments">
-            <div className="nestedcomments-container">
+        <div className="nestedcomment">
+            <div className="nestedcomment-info">
                 <Avatar
-                    className="postcard-info-img"
+                    className="nestedcomment-info-img"
                     width="30px"
                     height="30px"
                 />
-                <div className="info">
-                    <span>{name}</span>
-                    <p>{description}</p>
+                <div className="nestedcomment-details">
+                    <span className="nestedcomment-name">{name}</span>
+                    <span className="nestedcomment-date">
+                        {moment(createDate).format('YYYY년 M월 D일')}
+                    </span>
                 </div>
-                <span className="date">
-                    {moment(createDate).format('YYYY년 M월 D일')}
+                {dropdownComponent()}
+            </div>
+            <p className="nestedcomment-description">{description}</p>
+            <div className="nestedcomments-like">
+                {likedButtonComponent()}
+                <span>
+                    {likes.length === 0 ? null : `좋아요${likes.length}`}
                 </span>
             </div>
-            <div>
-                {likedButtonComponent()}
-                {likes.length === 0 ? null : likes.length}
-            </div>
-            {editButtonComponent()}
+            {isEditing && (
+                <div className="nestedcomment-active">
+                    <CommentForm
+                        submitLabel="댓글 수정"
+                        textLabel="수정"
+                        handleCancelButton
+                        initialText={description}
+                        handleSubmit={newComment => {
+                            editComment(newComment, commentId);
+                        }}
+                        handleCancel={() => setActiveComment(null)}
+                    />
+                </div>
+            )}
         </div>
     );
 }

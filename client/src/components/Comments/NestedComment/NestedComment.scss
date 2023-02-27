@@ -1,0 +1,55 @@
+@import '../../../sass/main.scss';
+
+.nestedcomment {
+    margin: 10px 0 10px;
+    width: 98%;
+    float: right;
+
+    .nestedcomment-info {
+        display: flex;
+        margin-top: 10px;
+        gap: 7px;
+        align-items: center;
+
+        .nestedcomment-info-img {
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .nestedcomment-details {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+
+            .nestedcomment-name {
+                font-weight: bold;
+                font-size: $base-font-sm;
+            }
+
+            .nestedcomment-date {
+                font-size: $base-font-sm;
+                color: $base-main-color;
+            }
+        }
+    }
+
+    .nestedcomment-description {
+        margin: 5px 0 5px;
+    }
+
+    .nestedcomments-like {
+        display: flex;
+        justify-items: center;
+        gap: 2px;
+        font-size: $f-small;
+        margin-top: 10px;
+
+        span {
+            font-size: $f-small;
+        }
+    }
+
+    .nestedcomment-active {
+        margin-top: 10px;
+    }
+}

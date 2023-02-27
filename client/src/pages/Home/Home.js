@@ -1,6 +1,7 @@
 //  eslint-disable
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import customAxios from '../../libs/api/axios';
+import authContext from '../../libs/api/AuthContext';
 import PostsCard from '../../components/PostCard/PostsCard/PostsCard';
 import Loading from '../../components/Loading/Loading';
 import './Home.scss';
@@ -19,7 +20,7 @@ function Home() {
     const deletePost = async postId => {
         // eslint-disable-next-line no-alert
         if (window.confirm('게시물을 삭제하시겠습니까?')) {
-            await customAxios
+            await authContext
                 .delete('/post', {
                     data: {
                         postId,

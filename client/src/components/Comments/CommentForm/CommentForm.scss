@@ -4,7 +4,7 @@
     textarea {
         flex: 5;
         padding: 10px;
-        width: 50%;
+        width: 100%;
         border-radius: $base-border-radius;
         outline: none;
         resize: none;
@@ -12,13 +12,18 @@
         // background-color: transparent;
     }
 
-    button {
-        margin-top: 10px;
-        padding: 10px;
-        border: none;
-        border-radius: $base-border-radius;
-        background: blue;
-        color: white;
-        cursor: pointer;
+    .comment-button {
+        text-align: right;
+        margin-top: 5px;
+
+        button {
+            padding: 10px;
+            border: none;
+            border-radius: $base-border-radius;
+            background: $base-blue-color;
+            color: white;
+            margin-right: 5px;
+            cursor: pointer;
+        }
     }
 }

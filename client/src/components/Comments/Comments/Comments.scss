@@ -1,21 +1,10 @@
-%comment-btn {
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-}
+@import '../../../sass/main.scss';
 
 .postcomment {
     button {
-        @extend %comment-btn;
+        @include btn;
     }
-
-    .aaa {
-        font-size: 20px;
-        margin-left: 200px;
+    .postcomment-button {
+        margin-top: 5px;
     }
-
-    // .postcomment-card {
-    // border: 1px solid black;
-    // border-radius: $base-border-radius;
-    // }
 }

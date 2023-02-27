@@ -1,36 +1,54 @@
-.nestedcomments {
-    .nestedcomments-container {
-        margin: 30px 0px;
-        display: flex;
-        justify-content: space-between;
-        gap: 10px;
+@import '../../../sass/main.scss';
 
-        .postcard-info-img {
+.nestedcomments {
+    margin-top: 20px;
+
+    .nestedcomments-info {
+        display: flex;
+        gap: 7px;
+        justify-items: center;
+        align-items: center;
+
+        .nestedcomments-info-img {
             border-radius: 50%;
             object-fit: cover;
         }
 
-        .info {
-            flex: 5;
+        .nestedcomments-details {
             display: flex;
             flex-direction: column;
-            gap: 3px;
-            align-items: flex-start;
+            width: 100%;
 
-            span {
-                font-weight: 500;
+            .nestedcomments-name {
+                font-weight: bold;
+                font-size: $base-font-sm;
             }
 
-            // p {
-            //     color: $base-main-color;
-            // }
+            .nestedcomments-date {
+                font-size: $base-font-sm;
+                color: $base-main-color;
+            }
         }
+    }
 
-        .date {
-            flex: 1;
-            align-self: center;
-            color: gray;
-            font-size: 12px;
+    .nestedcomments-description {
+        margin: 5px 0 5px;
+    }
+
+    .nestedcomments-button {
+        display: flex;
+        text-align: center;
+        justify-items: center;
+        gap: 5px;
+        font-size: $f-small;
+        margin-top: 10px;
+
+        span {
+            font-size: $f-small;
         }
+    }
+
+    .nestedcomments-active {
+        margin-top: 10px;
     }
 }
