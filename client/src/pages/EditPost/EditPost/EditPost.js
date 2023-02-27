@@ -1,11 +1,8 @@
-/* eslint-disable react/prop-types */
-/* eslint-disable react/no-danger */
-/* eslint-disable no-console */
 //  eslint-disable
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import customAxios from '../libs/api/axios';
-import EditPosts from '../components/EditPost/EditPosts';
+import customAxios from '../../../libs/api/axios';
+import EditPosts from '../../../components/EditPost/EditPost';
 
 function EditPost() {
     // 게시물 내용.

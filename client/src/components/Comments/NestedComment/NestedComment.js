@@ -12,6 +12,7 @@ import CommentForm from '../CommentForm/CommentForm';
 import customAxios from '../../../libs/api/axios';
 import { ReactComponent as Avatar } from '../../../assets/images/avatar.svg';
 import CommentDropdown from '../Dropdown/CommentDropdown';
+import authContext from '../../../libs/api/AuthContext';
 
 function NestedComment({
     commentId,
@@ -41,7 +42,7 @@ function NestedComment({
 
     // 좋아요 추가
     const handleAddLike = async addLikeId => {
-        await customAxios
+        await authContext
             .post('/liked', {
                 postId: id,
                 commentId: addLikeId,
@@ -56,7 +57,7 @@ function NestedComment({
     };
     // 좋아요 삭제
     const handleDeleteLike = async deleteCommentId => {
-        await customAxios
+        await authContext
             .delete('/liked', {
                 data: {
                     commentId: deleteCommentId,

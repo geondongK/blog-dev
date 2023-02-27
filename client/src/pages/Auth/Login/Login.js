@@ -70,7 +70,7 @@ function Login() {
 
     return (
         <div className="auth">
-            <div className="wrapper">
+            <div className="container">
                 <div className="auth-title">
                     <span>로그인</span>
                 </div>

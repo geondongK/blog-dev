@@ -1,7 +1,8 @@
 @import '../../sass/main.scss';
 
-.errorsMessage {
-    font-size: $f-small;
+.errors-message {
+    font-size: $f-mid;
+    font-weight: bold;
     color: $base-error-color;
 }
 
@@ -12,7 +13,7 @@
     justify-content: center;
     height: 100%;
 
-    .wrapper {
+    .container {
         width: 500px;
         max-width: 500px;
         background: #ffffff;

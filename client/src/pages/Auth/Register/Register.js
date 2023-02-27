@@ -76,7 +76,7 @@ function Register() {
 
     return (
         <div className="auth">
-            <div className="wrapper">
+            <div className="container">
                 <div className="auth-title">
                     <span>회원가입</span>
                 </div>

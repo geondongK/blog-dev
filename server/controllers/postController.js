@@ -41,8 +41,6 @@ exports.addpost = async (req, res) => {
         const { userId, title, description, name } = req.body;
         // const { title } = req.body;
 
-        console.log(userId, title, description, name);
-
         const today = moment().format('YYYY.MM.DD HH:mm');
 
         const query =
@@ -59,7 +57,6 @@ exports.addpost = async (req, res) => {
             row: row,
         });
     } catch (error) {
-        console.log(req.body);
         res.json({ error: error.message });
     }
 };

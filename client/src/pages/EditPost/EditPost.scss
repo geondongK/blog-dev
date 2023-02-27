@@ -1,0 +1,70 @@
+@import '../../sass/main.scss';
+.errors-message {
+    font-size: $f-mid;
+    font-weight: bold;
+    color: $base-error-color;
+    text-align: center;
+}
+.editpost {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+    @include sm {
+        margin-top: 0px;
+    }
+    .container {
+        display: flex;
+        justify-content: center;
+        justify-items: center;
+        max-width: 650px;
+        height: 630px;
+        border-radius: $base-border-radius * 2;
+        border: 1px solid $base-main-color;
+        background-color: $base-white-color;
+        padding: 20px;
+        @include sm {
+            height: 700px;
+            border-radius: 0px;
+        }
+
+        .title {
+            margin: 10px 0 10px;
+            input {
+                display: block;
+                width: 100%;
+                padding: 10px;
+                height: 40px;
+                border: 1px solid black;
+                border-radius: $base-border-radius;
+            }
+        }
+
+        .quill {
+            width: 100%;
+            height: 400px;
+        }
+    }
+
+    .editpost-submit {
+        display: flex;
+        justify-content: right;
+        margin-top: 50px;
+        @include sm {
+            margin-top: 70px;
+        }
+
+        button {
+            @include btn;
+            background-color: #3d5afe;
+            color: white;
+            padding: 10px;
+            font-weight: bold;
+            border: none;
+            border-radius: $base-border-radius;
+            cursor: pointer;
+            &:hover {
+                background-color: #303f9f;
+            }
+        }
+    }
+}

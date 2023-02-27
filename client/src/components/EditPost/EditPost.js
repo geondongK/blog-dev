@@ -1,29 +1,26 @@
 /* eslint-disable react/no-danger */
-/* eslint-disable no-console */
-//   eslint-disable
+// eslint-disable
+import '../../pages/EditPost/EditPost.scss';
 import React, { useMemo, useRef, useState } from 'react';
 import ReactQuill, { Quill } from 'react-quill';
-import './AddPost.scss';
-
+import { useParams, useNavigate } from 'react-router-dom';
 import 'react-quill/dist/quill.snow.css';
-import { useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-
 import ImageResize from 'quill-image-resize';
-import customAxios from '../../libs/api/axios';
+
+import authContext from '../../libs/api/AuthContext';
 
 Quill.register('modules/ImageResize', ImageResize);
-function AddPost() {
+function EditPost({ postcontent }) {
     const [postInfo, setPostInfo] = useState({
-        title: '',
-        description: '',
+        title: postcontent.title,
+        description: postcontent.description,
     });
     const [isError, setError] = useState(null);
 
     const quillRef = useRef();
 
-    const { currentUser } = useSelector(state => state.user);
     const navigate = useNavigate();
+    const { id } = useParams();
 
     const imageHandler = () => {
         // 이미지를 저장할 input type=file DOM을 생성.
@@ -40,9 +37,7 @@ function AddPost() {
             formData.append('file', file);
 
             try {
-                const response = await customAxios.post('/upload', formData);
-
-                console.log(response.data);
+                const response = await authContext.post('/upload', formData);
 
                 const IMG_URL = `${process.env.REACT_APP_API_URL_IMAGE}${response.data}`;
 
@@ -67,24 +62,24 @@ function AddPost() {
 
     const onSubmit = e => {
         e.preventDefault();
-        if (postInfo.title.length < 5) {
-            setError('5자리 이상 !');
+        if (postInfo.title.length < 1) {
+            setError('제목을 작성해 주세요.');
             return;
         }
-        customAxios
-            .post('/post', {
-                userId: currentUser.user.id,
+        if (postInfo.description.length < 1) {
+            setError('본문을 작성해 주세요.');
+            return;
+        }
+        authContext
+            .put(`/post/edit/${id}`, {
+                id,
                 title: postInfo.title,
                 description: postInfo.description,
-                name: currentUser.user.name,
             })
-            .then(response => {
+            .then(() => {
                 navigate('/');
-                console.log(response.data);
             })
-            .catch(error => {
-                console.log(error);
-            });
+            .catch(() => {});
     };
 
     const modules = useMemo(
@@ -99,7 +94,7 @@ function AddPost() {
                         { indent: '-1' },
                         { indent: '+1' },
                     ],
-                    ['link', 'image'],
+                    ['image'],
                     [{ align: [] }, { color: [] }, { background: [] }],
                     ['clean'],
                 ],
@@ -124,7 +119,7 @@ function AddPost() {
         'list',
         'bullet',
         'indent',
-        'link',
+        // 'link',
         'image',
         'align',
         'color',
@@ -132,40 +127,43 @@ function AddPost() {
     ];
 
     return (
-        <div className="addpost">
-            <form noValidate autoComplete="off" onSubmit={onSubmit}>
-                <div className="title">
-                    <span>제목</span>
-                    <input
-                        type="text"
-                        id="title"
-                        name="title"
-                        placeholder="제목"
-                        value={postInfo.title}
-                        onChange={handleChangeValue}
-                    />
-                </div>
-                <div className="quill">
-                    <ReactQuill
-                        ref={quillRef}
-                        theme="snow"
-                        modules={modules}
-                        placeholder="게시물을 작성해 주세요."
-                        value={postInfo.description}
-                        onChange={handleChangeDescription}
-                        formats={formats}
-                        id="description"
-                        name="description"
-                        style={{ height: 600 }}
-                    />
-                </div>
-                <button style={{ cursor: 'pointer' }} type="submit">
-                    저장
-                </button>
-            </form>
-            {isError !== null && <div className="errors"> {isError} </div>}
+        <div className="editpost">
+            <div className="container">
+                <form noValidate autoComplete="off" onSubmit={onSubmit}>
+                    <h3>글작성</h3>
+                    <div className="title">
+                        <input
+                            type="text"
+                            id="title"
+                            name="title"
+                            placeholder="제목"
+                            value={postInfo.title}
+                            onChange={handleChangeValue}
+                        />
+                    </div>
+                    <div className="quill">
+                        <ReactQuill
+                            ref={quillRef}
+                            theme="snow"
+                            modules={modules}
+                            placeholder="게시물을 작성해 주세요."
+                            value={postInfo.description}
+                            onChange={handleChangeDescription}
+                            formats={formats}
+                            id="description"
+                            name="description"
+                        />
+                    </div>
+                    <div className="editpost-submit">
+                        <button type="submit">저장</button>
+                    </div>
+                    {isError !== null && (
+                        <div className="errors-message"> {isError} </div>
+                    )}
+                </form>
+            </div>
         </div>
     );
 }
 
-export default AddPost;
+export default EditPost;
