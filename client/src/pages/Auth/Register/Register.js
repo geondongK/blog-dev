@@ -71,7 +71,7 @@ function Register() {
     };
 
     const handleRegisterError = () => {
-        return <span className="errorsMessage">{registerMessage}</span>;
+        return <span className="errors-message">{registerMessage}</span>;
     };
 
     return (
@@ -109,7 +109,7 @@ function Register() {
                             }}
                         />
                         {errors.name && (
-                            <span className="errorsMessage">
+                            <span className="errors-message">
                                 {errors.name.message}
                             </span>
                         )}
@@ -127,7 +127,7 @@ function Register() {
                             }}
                         />
                         {errors.email && (
-                            <span className="errorsMessage">
+                            <span className="errors-message">
                                 {errors.email.message}
                             </span>
                         )}
@@ -145,7 +145,7 @@ function Register() {
                             }}
                         />
                         {errors.password && (
-                            <span className="errorsMessage">
+                            <span className="errors-message">
                                 {errors.password.message}
                             </span>
                         )}
@@ -163,7 +163,7 @@ function Register() {
                             }}
                         />
                         {errors.passwordConfirm && (
-                            <span className="errorsMessage">
+                            <span className="errors-message">
                                 {errors.passwordConfirm.message}
                             </span>
                         )}

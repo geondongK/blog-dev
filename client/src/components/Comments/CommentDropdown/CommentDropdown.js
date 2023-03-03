@@ -26,10 +26,9 @@ function CommentDropdown({ commentId, deleteComment, setActiveComment }) {
     };
 
     return (
-        <div className="dropdown">
+        <div className="comment-dropdown">
             <button
                 className="dropdown-btn"
-                // role="button"
                 type="button"
                 onClick={() => {
                     setDropdownShow(!dropdownShow);

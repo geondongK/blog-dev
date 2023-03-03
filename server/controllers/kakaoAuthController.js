@@ -86,6 +86,7 @@ exports.kakaoLogin = async (req, res, next) => {
         // console.log(me);
 
         const { id, kakao_account } = me;
+
         const userInformation = {
             // 이메일 선택 동의.
             // email: kakao_account.email,

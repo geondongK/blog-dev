@@ -1,4 +1,4 @@
-//  eslint-disable
+// eslint-disable
 import './Post.scss';
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
@@ -48,6 +48,7 @@ function Post() {
             .post('/comment', {
                 id: null,
                 postId: id,
+                userId: currentUser.user.id,
                 description: newComment,
                 userName: currentUser.user.name,
                 parentId,
@@ -150,7 +151,6 @@ function Post() {
                         setActiveComment={setActiveComment}
                     />
                 ))}
-
                 {!currentUser ? (
                     <h4 className="post-auth">
                         <Link to="/login">로그인</Link>을 하셔야 댓글을 작성할

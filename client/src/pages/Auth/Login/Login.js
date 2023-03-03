@@ -65,7 +65,7 @@ function Login() {
     };
 
     const handleLoginError = () => {
-        return <span className="errorsMessage">{loginMessage}</span>;
+        return <span className="errors-message">{loginMessage}</span>;
     };
 
     return (
@@ -104,7 +104,7 @@ function Login() {
                             }}
                         />
                         {errors.email && (
-                            <span className="errorsMessage">
+                            <span className="errors-message">
                                 {errors.email.message}
                             </span>
                         )}
@@ -122,7 +122,7 @@ function Login() {
                             }}
                         />
                         {!errors.password ? null : (
-                            <span className="errorsMessage">
+                            <span className="errors-message">
                                 {errors.password.message}
                             </span>
                         )}

@@ -24,6 +24,7 @@ exports.addComment = async (req, res) => {
         // const postId = req.params.postId;
         const comment = ({
             postId,
+            userId,
             description,
             userName,
             parentId,
@@ -34,7 +35,8 @@ exports.addComment = async (req, res) => {
             'INSERT INTO comment ( postId, userId, parentId, description, userName, createDate) VALUES (?,?,?,?,?,?)';
         const row = await pool.query(query, [
             postId,
-            req.user.id,
+            // req.user.id,
+            userId,
             parentId,
             description,
             userName,

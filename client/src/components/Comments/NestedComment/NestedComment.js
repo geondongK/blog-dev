@@ -11,7 +11,7 @@ import { useParams } from 'react-router-dom';
 import CommentForm from '../CommentForm/CommentForm';
 import customAxios from '../../../libs/api/axios';
 import { ReactComponent as Avatar } from '../../../assets/images/avatar.svg';
-import CommentDropdown from '../Dropdown/CommentDropdown';
+import CommentDropdown from '../CommentDropdown/CommentDropdown';
 import authContext from '../../../libs/api/AuthContext';
 
 function NestedComment({

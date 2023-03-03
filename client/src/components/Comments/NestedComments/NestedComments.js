@@ -1,4 +1,4 @@
-// eslint-disable
+//   eslint-disable
 import './NestedComments.scss';
 import React, { useEffect, useState } from 'react';
 import moment from 'moment';
@@ -10,7 +10,7 @@ import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import customAxios from '../../../libs/api/axios';
 import { ReactComponent as Avatar } from '../../../assets/images/avatar.svg';
-import CommentDropdown from '../Dropdown/CommentDropdown';
+import CommentDropdown from '../CommentDropdown/CommentDropdown';
 import CommentForm from '../CommentForm/CommentForm';
 
 function NestedComments({
@@ -158,7 +158,7 @@ function NestedComments({
                         {moment(createDate).format('YYYY년 M월 D일')}
                     </span>
                 </div>
-                <div>{dropdownComponent()}</div>
+                {dropdownComponent()}
             </div>
             <p className="nestedcomments-description">{description}</p>
             <div className="nestedcomments-button">

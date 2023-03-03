@@ -46,7 +46,7 @@ function Comments({
                     type="button"
                 >
                     <FontAwesomeIcon icon={faCommentDots} />
-                    {` 댓글${subPostComment.length}`}
+                    {` 댓글 ${subPostComment.length}`}
                 </button>
             </div>
             {/* 대댓글 */}

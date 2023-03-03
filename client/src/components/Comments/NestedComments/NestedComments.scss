@@ -36,15 +36,12 @@
     }
 
     .nestedcomments-button {
-        display: flex;
-        text-align: center;
-        justify-items: center;
-        gap: 5px;
         font-size: $f-small;
         margin-top: 10px;
 
         span {
-            font-size: $f-small;
+            margin-left: 3px;
+            margin-right: 3px;
         }
     }
 
