@@ -1,14 +1,16 @@
-//  eslint-disable
+/*  eslint-disable */
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import customAxios from '../../libs/api/axios';
 import authContext from '../../libs/api/AuthContext';
 import PostsCard from '../../components/PostCard/PostsCard/PostsCard';
 import Loading from '../../components/Loading/Loading';
+
 import './Home.scss';
 
 function Home() {
     // 게시물 출력
     const [posts, setPosts] = useState([]);
+
     // 다음 페이지 여부 확인.
     const [hasNextPage, setHasNextPage] = useState(true);
     const [loading, setLoading] = useState(true);

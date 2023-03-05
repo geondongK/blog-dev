@@ -7,6 +7,8 @@ const { verifyToken } = require('../middleware/verifyToken');
 router.get('/postList', postController.postList);
 // 현재 게시물.
 router.get('/get/:id', postController.getById);
+// 댓글 수
+router.post('/countComment', postController.countComment);
 // 게시물 작성
 router.post('/', postController.addpost);
 // 게시물 수정

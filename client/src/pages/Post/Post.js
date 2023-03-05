@@ -9,7 +9,7 @@ import PostComments from '../../components/Comments/Comments/Comments';
 import PostCommentForm from '../../components/Comments/CommentForm/CommentForm';
 import customAxios from '../../libs/api/axios';
 import authContext from '../../libs/api/AuthContext';
-// import Loading from '../../components/Loading/Loading';
+import Loading from '../../components/Loading/Loading';
 import 'moment/locale/ko';
 
 function Post() {
@@ -20,7 +20,7 @@ function Post() {
     // 답글 작성 및 편집.
     const [activeComment, setActiveComment] = useState(null);
 
-    // const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(true);
 
     // 현재시간.
     const nowTime = moment().format('YYYY-MM-DD HH:mm:ss');
@@ -121,13 +121,14 @@ function Post() {
             const response = await customAxios.get(`/comment/${id}`);
             setPostComments(response.data);
         };
+        setLoading(false);
         fetchPost();
         fetchComments();
-        // setLoading(false);
     }, []);
 
     return (
         <div className="post">
+            {loading ? <Loading /> : null}
             <div className="container">
                 {postcontents.map(postcontent => (
                     <Postcontent

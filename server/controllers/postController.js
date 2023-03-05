@@ -17,6 +17,22 @@ exports.postList = async (req, res) => {
         res.json({ error: error.message });
     }
 };
+// 게시물 댓글 수
+exports.countComment = async (req, res) => {
+    try {
+        const { postId } = req.body;
+
+        const query = `SELECT B.description FROM post AS A
+                        INNER JOIN comment AS B
+                        ON A.id = B.postId WHERE B.parentId IS NULL AND A.id = ? `;
+        const row = await pool.query(query, [postId]);
+        res.status(200).json(row);
+
+        // res.json({ success: ture, row: row });
+    } catch (error) {
+        res.json({ error: error.message });
+    }
+};
 
 // 현재 게시물.
 exports.getById = async (req, res) => {
