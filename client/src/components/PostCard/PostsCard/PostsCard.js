@@ -1,4 +1,4 @@
-/*  eslint-disable */
+//   eslint-disable
 import './PostsCard.scss';
 import React, { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -30,9 +30,7 @@ function PostsCard({ post, deletePost }) {
             const response = await customAxios.post(`/post/countComment`, {
                 postId: post.id,
             });
-            console.log(response.data);
             setCountComment(response.data);
-            console.log(countComment);
         };
         fetchCountComment();
     }, []);
