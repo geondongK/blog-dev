@@ -1,10 +1,10 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable no-console */
-/* eslint-disable */
+//  eslint-disable
 import './Navbar.scss';
 import React, { useEffect, useRef, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
     faMagnifyingGlass,
@@ -15,7 +15,6 @@ import {
     faXmark,
     faPenToSquare,
 } from '@fortawesome/free-solid-svg-icons';
-import { searchSuccess } from '../../redux/slices/searchSlice';
 
 import customAxios from '../../libs/api/axios';
 import { persistor } from '../../redux/store/store';
@@ -24,7 +23,6 @@ function Navbar() {
     const checkedRef = useRef(false);
     const [q, SetQ] = useState('');
     const [checked, setChecked] = useState(true);
-    const dispatch = useDispatch();
 
     // console.log(search, setSearch);
 
@@ -41,7 +39,6 @@ function Navbar() {
     const onKeyDown = e => {
         if (e.key === 'Enter') {
             if (q.length >= 1) {
-                dispatch(searchSuccess(q));
                 navigate(`/search?q=${q}`);
             }
         }
