@@ -1,10 +1,5 @@
 @import '../../sass/main.scss';
-.errors-message {
-    font-size: $f-mid;
-    font-weight: bold;
-    color: $base-error-color;
-    text-align: center;
-}
+
 .editpost {
     display: flex;
     justify-content: center;
@@ -66,5 +61,12 @@
                 background-color: #303f9f;
             }
         }
+    }
+
+    .errors-message {
+        font-size: $f-mid;
+        font-weight: bold;
+        color: $base-error-color;
+        text-align: center;
     }
 }

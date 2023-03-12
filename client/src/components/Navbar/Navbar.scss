@@ -81,6 +81,9 @@
                     no-repeat;
                 background-size: cover;
                 cursor: pointer;
+                @include sm {
+                    -webkit-appearance: none;
+                }
             }
         }
     }

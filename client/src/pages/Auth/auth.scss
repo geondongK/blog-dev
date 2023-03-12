@@ -1,11 +1,5 @@
 @import '../../sass/main.scss';
 
-.errors-message {
-    font-size: $f-mid;
-    font-weight: bold;
-    color: $base-error-color;
-}
-
 .auth {
     position: relative;
     display: flex;
@@ -28,6 +22,7 @@
             height: calc(100vh - $base-navbar-height);
             padding: 15px 10px;
             margin-top: 0;
+            border: none;
         }
 
         .auth-title {
@@ -107,5 +102,10 @@
             font-size: $f-mid;
             font-weight: bold;
         }
+    }
+
+    .errors-message {
+        font-size: $base-font-size;
+        color: $base-error-color;
     }
 }
