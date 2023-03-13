@@ -1,4 +1,4 @@
-// eslint-disable
+/* eslint-disable */
 import './Post.scss';
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
@@ -111,64 +111,75 @@ function Post() {
     };
 
     useEffect(() => {
-        // 게시물 내용.
         const fetchPost = async () => {
-            const response = await customAxios.get(`/post/get/${id}`);
-            setPostcontents(response.data);
+            setLoading(true);
+            try {
+                const response = await customAxios.get(`/post/get/${id}`);
+                setPostcontents(response.data);
+            } catch (error) {}
+            setLoading(false);
         };
         // 게시물 댓글.
         const fetchComments = async () => {
-            const response = await customAxios.get(`/comment/${id}`);
-            setPostComments(response.data);
+            setLoading(true);
+            try {
+                const response = await customAxios.get(`/comment/${id}`);
+                setPostComments(response.data);
+            } catch (error) {}
+            setLoading(false);
         };
-        setLoading(false);
         fetchPost();
         fetchComments();
     }, []);
 
     return (
         <div className="post">
-            {loading ? <Loading /> : null}
-            <div className="container">
-                {postcontents.map(postcontent => (
-                    <Postcontent
-                        postcontent={postcontent}
-                        // Dompurify 데이터 받기.
-                        description={postcontent.description}
-                        key={postcontent.id}
-                    />
-                ))}
-                <hr className="post-line" />
-                {postComment.map(mainPostComment => (
-                    <PostComments
-                        key={mainPostComment.id}
-                        commentId={mainPostComment.id}
-                        mainPostComment={mainPostComment}
-                        subPostComment={getNestedComments(mainPostComment.id)}
-                        addComment={addComment}
-                        editComment={editComment}
-                        deleteComment={deleteComment}
-                        activeComment={activeComment}
-                        setActiveComment={setActiveComment}
-                    />
-                ))}
-                {!currentUser ? (
-                    <h4 className="post-auth">
-                        <Link to="/login">로그인</Link>을 하셔야 댓글을 작성할
-                        수 있습니다
-                    </h4>
-                ) : (
-                    <div className="post-commentForm">
-                        <PostCommentForm
-                            submitLabel="댓글달기"
-                            textLabel="댓글 달기"
-                            handleSubmit={newComment => {
-                                addComment(newComment, null);
-                            }}
+            {loading ? (
+                <div className="post-loading">{loading && <Loading />}</div>
+            ) : (
+                <div className="container">
+                    {postcontents.map(postcontent => (
+                        <Postcontent
+                            postcontent={postcontent}
+                            // Dompurify 데이터 받기.
+                            description={postcontent.description}
+                            key={postcontent.id}
                         />
-                    </div>
-                )}
-            </div>
+                    ))}
+                    <hr className="post-line" />
+                    {postComment.map(mainPostComment => (
+                        <PostComments
+                            key={mainPostComment.id}
+                            commentId={mainPostComment.id}
+                            mainPostComment={mainPostComment}
+                            subPostComment={getNestedComments(
+                                mainPostComment.id,
+                            )}
+                            addComment={addComment}
+                            editComment={editComment}
+                            deleteComment={deleteComment}
+                            activeComment={activeComment}
+                            setActiveComment={setActiveComment}
+                        />
+                    ))}
+                    {!currentUser ? (
+                        <h4 className="post-auth">
+                            <Link to="/login">로그인</Link>을 하셔야 댓글을
+                            작성할 수 있습니다
+                        </h4>
+                    ) : (
+                        <div className="post-commentForm">
+                            <PostCommentForm
+                                submitLabel="댓글달기"
+                                textLabel="댓글 달기"
+                                handleSubmit={newComment => {
+                                    addComment(newComment, null);
+                                }}
+                            />
+                        </div>
+                    )}
+                </div>
+            )}
         </div>
     );
 }
