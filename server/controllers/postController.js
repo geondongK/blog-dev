@@ -57,7 +57,7 @@ exports.addpost = async (req, res) => {
         const { userId, title, description, name } = req.body;
         // const { title } = req.body;
 
-        const today = moment().format('YYYY.MM.DD HH:mm');
+        const today = moment().format('YYYY-MM-DD HH:mm:ss');
 
         const query =
             'INSERT INTO post (userId, title, description, name, createDate) VALUES (?,?,?,?,?)';

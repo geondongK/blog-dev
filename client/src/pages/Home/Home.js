@@ -110,6 +110,8 @@ function Home() {
         }
     }, []);
 
+    useEffect(() => {}, []);
+
     useEffect(() => {
         if (!observerTargetEl.current || !hasNextPage) {
             setLoading(false);
