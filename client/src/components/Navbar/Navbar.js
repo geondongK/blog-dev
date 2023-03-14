@@ -1,5 +1,4 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-/* eslint-disable no-console */
 //  eslint-disable
 import './Navbar.scss';
 import React, { useEffect, useRef, useState } from 'react';
@@ -21,7 +20,7 @@ import { persistor } from '../../redux/store/store';
 
 function Navbar() {
     const checkedRef = useRef(false);
-    const [q, SetQ] = useState('');
+    const [q, setQ] = useState('');
     const [checked, setChecked] = useState(true);
 
     // console.log(search, setSearch);
@@ -59,11 +58,10 @@ function Navbar() {
     const handleChecked = () => {
         setChecked(!checked);
         checkedRef.current.checked = checked;
+        setQ('');
     };
 
-    useEffect(() => {
-        // console.log(currentUser);
-    }, [checked]);
+    useEffect(() => {}, [checked]);
 
     return (
         <nav className="navbar">
@@ -81,6 +79,7 @@ function Navbar() {
                         onClick={() => {
                             checkedRef.current.checked = false;
                             setChecked(true);
+                            setQ('');
                         }}
                         className="nav-logo"
                         type="button"
@@ -94,7 +93,8 @@ function Navbar() {
                     </i>
                     <input
                         onKeyDown={onKeyDown}
-                        onChange={e => SetQ(e.target.value)}
+                        onChange={e => setQ(e.target.value)}
+                        value={q}
                         className="search-input"
                         type="search"
                         placeholder="검색"
