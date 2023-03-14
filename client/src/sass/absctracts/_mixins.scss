@@ -30,6 +30,7 @@ $breakpoints: (
 
 // 버튼.
 @mixin btn() {
+    color: #000000;
     background-color: transparent;
     border: none;
     cursor: pointer;

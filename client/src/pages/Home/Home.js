@@ -4,6 +4,7 @@ import customAxios from '../../libs/api/axios';
 import authContext from '../../libs/api/AuthContext';
 import PostsCard from '../../components/PostCard/PostsCard/PostsCard';
 import Loading from '../../components/Loading/Loading';
+import moment from 'moment';
 
 import './Home.scss';
 
@@ -45,7 +46,19 @@ function Home() {
             const dateDesc = posts
                 .filter(post => post)
                 .sort(
-                    (a, b) => new Date(b.createDate) - new Date(a.createDate),
+                    (a, b) =>
+                        new Date(
+                            moment().format(
+                                b.createDate,
+                                'YYYY-MM-DD HH:mm:ss',
+                            ),
+                        ) -
+                        new Date(
+                            moment().format(
+                                a.createDate,
+                                'YYYY-MM-DD HH:mm:ss',
+                            ),
+                        ),
                 );
 
             setPosts(dateDesc);
@@ -54,7 +67,19 @@ function Home() {
             const dateAsc = posts
                 .filter(post => post)
                 .sort(
-                    (a, b) => new Date(a.createDate) - new Date(b.createDate),
+                    (a, b) =>
+                        new Date(
+                            moment().format(
+                                a.createDate,
+                                'YYYY-MM-DD HH:mm:ss',
+                            ),
+                        ) -
+                        new Date(
+                            moment().format(
+                                b.createDate,
+                                'YYYY-MM-DD HH:mm:ss',
+                            ),
+                        ),
                 );
 
             setPosts(dateAsc);
