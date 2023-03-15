@@ -1,5 +1,3 @@
-/* eslint-disable jsx-a11y/interactive-supports-focus */
-/* eslint-disable jsx-a11y/click-events-have-key-events */
 //  eslint-disable
 import './CommentDropdown.scss';
 import React, { useState } from 'react';
@@ -41,17 +39,17 @@ function CommentDropdown({ commentId, deleteComment, setActiveComment }) {
             {dropdownShow && (
                 <div className="dropdown-options">
                     {options.map(option => (
-                        <div
+                        <button
                             key={option}
                             className="dropdown-item"
-                            role="button"
+                            type="button"
                             onClick={() => {
                                 setDropdownShow(false);
                                 handleOptions(option);
                             }}
                         >
                             {option}
-                        </div>
+                        </button>
                     ))}
                 </div>
             )}
