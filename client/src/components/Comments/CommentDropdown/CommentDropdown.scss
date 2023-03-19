@@ -15,13 +15,11 @@
     bottom: 10px;
 
     .dropdown-btn {
-        background-color: transparent;
-        border: none;
+        @include btn;
         font-weight: bold;
         display: flex;
         align-items: center;
         justify-content: center;
-        cursor: pointer;
     }
 
     .dropdown-options {
