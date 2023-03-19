@@ -41,13 +41,11 @@
         width: 100%;
 
         .dropdown-item {
+            @include btn;
             padding: 10px;
             width: 100%;
             display: flex;
-            cursor: pointer;
             transition: all 0.2s;
-            background-color: transparent;
-            border: none;
 
             &:hover {
                 background-color: #f4f4f4;

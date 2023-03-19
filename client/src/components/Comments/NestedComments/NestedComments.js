@@ -158,7 +158,9 @@ function NestedComments({
                         {moment(createDate).format('YYYY년 M월 D일')}
                     </span>
                 </div>
-                {dropdownComponent()}
+                <div className="nestedcomment-dropdown">
+                    {dropdownComponent()}
+                </div>
             </div>
             <p className="nestedcomments-description">{description}</p>
             <div className="nestedcomments-button">

@@ -1,4 +1,6 @@
 //  eslint-disable
+/* eslint-disable no-console */
+
 import './CommentDropdown.scss';
 import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -13,6 +15,8 @@ function CommentDropdown({ commentId, deleteComment, setActiveComment }) {
     const options = ['편집', '삭제'];
 
     const handleOptions = option => {
+        console.log(option);
+
         if (option === '편집') {
             setActiveComment({
                 id: commentId,
@@ -37,7 +41,7 @@ function CommentDropdown({ commentId, deleteComment, setActiveComment }) {
                 </i>
             </button>
             {dropdownShow && (
-                <div className="dropdown-options">
+                <div role="menu" className="dropdown-options">
                     {options.map(option => (
                         <button
                             key={option}

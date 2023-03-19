@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 // eslint-disable
 import './Dropdown.scss';
 import React, { useState } from 'react';
@@ -16,6 +17,7 @@ function Dropdown({ id, deletePost }) {
     const navigate = useNavigate();
 
     const handleOptions = option => {
+        console.log(option);
         if (option === '삭제') {
             deletePost(id);
         } else {
