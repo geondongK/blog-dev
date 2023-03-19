@@ -1,11 +1,5 @@
 @import '../../sass/main.scss';
 
-%btn {
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-}
-
 .navbar {
     display: flex;
     align-items: center;
@@ -46,7 +40,7 @@
         gap: 10px;
 
         .nav-logo {
-            @extend %btn;
+            @include btn;
             color: #000000;
             font-weight: bold;
             font-size: $base-font-size * 1.1;
@@ -60,6 +54,7 @@
             align-items: center;
             gap: 10px;
             border: 1px solid lightgray;
+
             border-radius: 5px;
             padding: $base-border-radius;
 
@@ -67,6 +62,7 @@
                 width: 300px;
                 border: none;
                 outline: none;
+                background-color: white;
                 @include sm {
                     width: 150px;
                 }
@@ -108,7 +104,7 @@
         }
 
         button {
-            @extend %btn;
+            @include btn;
             font-size: $base-font-size;
             border-radius: $base-border-radius;
             padding: 4px;
