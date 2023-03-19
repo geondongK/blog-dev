@@ -17,11 +17,10 @@ function Dropdown({ id, deletePost }) {
     const navigate = useNavigate();
 
     const handleOptions = option => {
-        console.log(option);
-        if (option === '삭제') {
-            deletePost(id);
-        } else {
+        if (option === '편집') {
             navigate(`/edit/${id}`);
+        } else {
+            deletePost(id);
         }
     };
 

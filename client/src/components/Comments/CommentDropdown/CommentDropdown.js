@@ -22,7 +22,7 @@ function CommentDropdown({ commentId, deleteComment, setActiveComment }) {
                 id: commentId,
                 type: 'editing',
             });
-        } else if (option === '삭제') {
+        } else {
             deleteComment(commentId);
         }
     };
