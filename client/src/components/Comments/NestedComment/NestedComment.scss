@@ -10,28 +10,37 @@
     .nestedcomment-info {
         display: flex;
         margin: 5px 0 0 5px;
-        gap: 7px;
+        justify-content: space-between;
         align-items: center;
 
-        .nestedcomment-info-img {
-            border-radius: 50%;
-            object-fit: cover;
+        .nestedcomment-space {
+            display: flex;
+            gap: 5px;
+
+            .nestedcomment-info-img {
+                border-radius: 50%;
+                object-fit: cover;
+            }
+
+            .nestedcomment-details {
+                display: flex;
+                flex-direction: column;
+                width: 100%;
+
+                .nestedcomment-name {
+                    font-weight: bold;
+                    font-size: $base-font-sm;
+                }
+
+                .nestedcomment-date {
+                    font-size: $base-font-sm;
+                    color: $base-main-color;
+                }
+            }
         }
 
-        .nestedcomment-details {
-            display: flex;
-            flex-direction: column;
-            width: 100%;
-
-            .nestedcomment-name {
-                font-weight: bold;
-                font-size: $base-font-sm;
-            }
-
-            .nestedcomment-date {
-                font-size: $base-font-sm;
-                color: $base-main-color;
-            }
+        .nestedcomment-dropdown {
+            margin-right: 10px;
         }
     }
 

@@ -143,16 +143,18 @@ function NestedComment({
     return (
         <div className="nestedcomment">
             <div className="nestedcomment-info">
-                <Avatar
-                    className="nestedcomment-info-img"
-                    width="30px"
-                    height="30px"
-                />
-                <div className="nestedcomment-details">
-                    <span className="nestedcomment-name">{name}</span>
-                    <span className="nestedcomment-date">
-                        {moment(createDate).format('YYYY년 M월 D일')}
-                    </span>
+                <div className="nestedcomment-space">
+                    <Avatar
+                        className="nestedcomment-info-img"
+                        width="30px"
+                        height="30px"
+                    />
+                    <div className="nestedcomment-details">
+                        <span className="nestedcomment-name">{name}</span>
+                        <span className="nestedcomment-date">
+                            {moment(createDate).format('YYYY년 M월 D일')}
+                        </span>
+                    </div>
                 </div>
                 <div className="nestedcomment-dropdown">
                     {dropdownComponent()}

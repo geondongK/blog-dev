@@ -5,28 +5,31 @@
 
     .nestedcomments-info {
         display: flex;
-        gap: 7px;
-        justify-items: center;
         align-items: center;
+        justify-content: space-between;
 
-        .nestedcomments-info-img {
-            border-radius: 50%;
-            object-fit: cover;
-        }
-
-        .nestedcomments-details {
+        .nestedcomments-space {
             display: flex;
-            flex-direction: column;
-            width: 100%;
+            gap: 5px;
 
-            .nestedcomments-name {
-                font-weight: bold;
-                font-size: $base-font-sm;
+            .nestedcomments-info-img {
+                border-radius: 50%;
+                object-fit: cover;
             }
 
-            .nestedcomments-date {
-                font-size: $base-font-sm;
-                color: $base-main-color;
+            .nestedcomments-details {
+                display: flex;
+                flex-direction: column;
+
+                .nestedcomments-name {
+                    font-weight: bold;
+                    font-size: $base-font-sm;
+                }
+
+                .nestedcomments-date {
+                    font-size: $base-font-sm;
+                    color: $base-main-color;
+                }
             }
         }
 
