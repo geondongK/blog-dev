@@ -1,4 +1,4 @@
-/* eslint-disable */
+//  eslint-disable
 import './Post.scss';
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
@@ -90,24 +90,21 @@ function Post() {
 
     // 댓글 & 답글 삭제 기능
     const deleteComment = async commentId => {
-        // eslint-disable-next-line no-alert
-        if (window.confirm('댓글을 삭제하시겠습니까?')) {
-            await authContext
-                .delete(`/comment`, {
-                    data: {
-                        commentId,
-                    },
-                })
-                .then(() => {
-                    const newComments = postComments.filter(
-                        newComment => newComment.id !== commentId,
-                    );
-                    setPostComments(newComments);
-                })
-                .catch(() => {
-                    // console.log(error);
-                });
-        }
+        await authContext
+            .delete(`/comment`, {
+                data: {
+                    commentId,
+                },
+            })
+            .then(() => {
+                const newComments = postComments.filter(
+                    newComment => newComment.id !== commentId,
+                );
+                setPostComments(newComments);
+            })
+            .catch(() => {
+                // console.log(error);
+            });
     };
 
     useEffect(() => {
@@ -116,7 +113,9 @@ function Post() {
             try {
                 const response = await customAxios.get(`/post/get/${id}`);
                 setPostcontents(response.data);
-            } catch (error) {}
+            } catch (error) {
+                // console.log(error);
+            }
             setLoading(false);
         };
         // 게시물 댓글.
@@ -125,7 +124,9 @@ function Post() {
             try {
                 const response = await customAxios.get(`/comment/${id}`);
                 setPostComments(response.data);
-            } catch (error) {}
+            } catch (error) {
+                // console.log(error);
+            }
             setLoading(false);
         };
         fetchPost();

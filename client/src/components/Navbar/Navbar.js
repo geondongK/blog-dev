@@ -14,7 +14,6 @@ import {
     faXmark,
     faPenToSquare,
 } from '@fortawesome/free-solid-svg-icons';
-
 import customAxios from '../../libs/api/axios';
 import { persistor } from '../../redux/store/store';
 

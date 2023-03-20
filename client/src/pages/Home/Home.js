@@ -1,10 +1,10 @@
-/*  eslint-disable */
+// eslint-disable
 import React, { useCallback, useEffect, useRef, useState } from 'react';
+import moment from 'moment';
 import customAxios from '../../libs/api/axios';
 import authContext from '../../libs/api/AuthContext';
-import PostsCard from '../../components/PostCard/PostsCard/PostsCard';
+import PostsCard from '../../components/PostCard/PostCard/PostCard';
 import Loading from '../../components/Loading/Loading';
-import moment from 'moment';
 
 import './Home.scss';
 
@@ -21,22 +21,20 @@ function Home() {
 
     // 게시물 삭제 기능.
     const deletePost = async postId => {
-        // eslint-disable-next-line no-alert
-        if (window.confirm('게시물을 삭제하시겠습니까?')) {
-            await authContext
-                .delete('/post', {
-                    data: {
-                        postId,
-                    },
-                })
-                .then(() => {
-                    const newPosts = posts.filter(post => post.id !== postId);
-                    setPosts(newPosts);
-                })
-                .catch(() => {
-                    // console.log(error);
-                });
-        }
+        await authContext
+            .delete('/post', {
+                data: {
+                    postId,
+                },
+            })
+            .then(() => {
+                const newPosts = posts.filter(post => post.id !== postId);
+                setPosts(newPosts);
+                // setconfirmMoadlCheck(false);
+            })
+            .catch(() => {
+                // console.log(error);
+            });
     };
 
     // 정렬기능.
@@ -110,7 +108,12 @@ function Home() {
         }
     }, []);
 
-    useEffect(() => {}, []);
+    // useEffect(() => {
+    //     console.log(confirmMoadlCheck);
+    //     if (1 === 2) {
+    //         deletePost();
+    //     }
+    // }, []);
 
     useEffect(() => {
         if (!observerTargetEl.current || !hasNextPage) {

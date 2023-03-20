@@ -8,9 +8,14 @@ import {
     faEllipsis,
 } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
+import ConfirmMoadl from '../../Modal/Comfirm/ComfirmModal';
 
 function Dropdown({ id, deletePost }) {
     const [dropdownShow, setDropdownShow] = useState(false);
+    // 모달창 오픈
+    const [confirmMoadl, setConfirmMoadl] = useState(false);
+    // 모달창 확인
+    const [confirmMoadlCheck, setconfirmMoadlCheck] = useState(true);
 
     const options = ['편집', '삭제'];
 
@@ -19,8 +24,8 @@ function Dropdown({ id, deletePost }) {
     const handleOptions = option => {
         if (option === '편집') {
             navigate(`/edit/${id}`);
-        } else {
-            deletePost(id);
+        } else if (option === '삭제') {
+            setConfirmMoadl(true);
         }
     };
 
@@ -54,6 +59,17 @@ function Dropdown({ id, deletePost }) {
                         </button>
                     ))}
                 </div>
+            )}
+            {confirmMoadl && (
+                <ConfirmMoadl
+                    // title="삭제"
+                    body="게시물을 삭제하시겠습니까?"
+                    closeModal={setConfirmMoadl}
+                    setconfirmMoadlCheck={setconfirmMoadlCheck}
+                    confirmMoadlCheck={confirmMoadlCheck}
+                    deleteContent={deletePost}
+                    id={id}
+                />
             )}
         </div>
     );

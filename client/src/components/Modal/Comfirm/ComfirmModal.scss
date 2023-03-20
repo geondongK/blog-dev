@@ -1,0 +1,71 @@
+@import '../../../sass//main.scss';
+
+.comfirm-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 2;
+
+    .location {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 80%;
+        @include sm {
+            width: 100%;
+        }
+
+        .container {
+            background-color: #fff;
+            width: 30%;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 8px 24px;
+            border-radius: $base-border-radius;
+            z-index: 4;
+            @include sm {
+                width: 80%;
+            }
+            .title {
+                font-weight: 500;
+                padding: 10px 0;
+                font-size: $base-font-lg;
+
+                button {
+                    @include btn;
+                    float: right;
+                    font-size: $base-font-size;
+                    border: 0;
+                    outline: 0;
+                    padding: 1px 1px;
+                }
+            }
+
+            .body {
+                color: #7b677b;
+                // padding: 15px 0;
+            }
+
+            .footer {
+                padding: 15px 0;
+
+                .cancel-button {
+                    color: $base-error-color;
+                }
+
+                button {
+                    @include btn;
+                    padding: 8px;
+                    font-weight: bold;
+                    font-size: $base-font-size;
+                    border-radius: $base-border-radius;
+                    color: $base-blue-color;
+                }
+            }
+        }
+    }
+}

@@ -2,7 +2,7 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import customAxios from '../../libs/api/axios';
-import PostsCard from '../../components/PostCard/PostsCard/PostsCard';
+import PostCard from '../../components/PostCard/PostCard/PostCard';
 import { useSelector } from 'react-redux';
 
 function Search() {
@@ -102,7 +102,7 @@ function Search() {
                 </button>
             </div>
             {posts.map(post => (
-                <PostsCard key={post.id} post={post} deletePost={deletePost} />
+                <PostCard key={post.id} post={post} deletePost={deletePost} />
             ))}
         </div>
         // <div>
