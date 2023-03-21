@@ -38,6 +38,7 @@
         }
 
         .socialAuth-kakao {
+            @include btn;
             border: 1px solid black;
             border-radius: 4px;
             width: 100%;
@@ -45,8 +46,6 @@
             display: flex;
             align-items: center;
             gap: 10px;
-            background-color: transparent;
-            cursor: pointer;
 
             span {
                 font-weight: bold;
@@ -82,14 +81,14 @@
             }
 
             button {
+                @include btn;
                 display: inline-block;
                 background-color: #3d5afe;
                 color: white;
                 padding: 10px;
                 font-weight: bold;
-                border: none;
                 border-radius: $base-border-radius;
-                cursor: pointer;
+
                 &:hover {
                     background-color: #303f9f;
                 }

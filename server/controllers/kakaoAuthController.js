@@ -172,6 +172,6 @@ exports.kakaoLogin = async (req, res, next) => {
         // console.log(error);
     }
 
-    // return res.redirect('http://localhost:3000');
-    return res.redirect('https://geondong.com');
+    return res.redirect('http://localhost:3000');
+    // return res.redirect('https://geondong.com');
 };
