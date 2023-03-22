@@ -1,9 +1,8 @@
-/* eslint-disable */
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+//  eslint-disable
+import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import customAxios from '../../libs/api/axios';
 import PostCard from '../../components/PostCard/PostCard/PostCard';
-import { useSelector } from 'react-redux';
 
 function Search() {
     // 게시물 출력.
@@ -105,11 +104,6 @@ function Search() {
                 <PostCard key={post.id} post={post} deletePost={deletePost} />
             ))}
         </div>
-        // <div>
-        //     {posts.map(post => (
-        //         <div key={post.id}>{post.title}</div>
-        //     ))}
-        // </div>
     );
 }
 

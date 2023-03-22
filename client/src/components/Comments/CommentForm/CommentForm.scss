@@ -17,13 +17,12 @@
         margin-top: 5px;
 
         button {
+            @include btn;
             padding: 10px;
-            border: none;
             border-radius: $base-border-radius;
             background: $base-blue-color;
             color: white;
             margin-right: 5px;
-            cursor: pointer;
         }
     }
 }
