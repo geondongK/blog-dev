@@ -1,9 +1,7 @@
 const express = require('express');
-// const fs = require('fs');
-// const https = require('https');
 const cookieParser = require('cookie-parser');
-const path = require('path');
 const cors = require('cors');
+
 /* Routers */
 const userRoutes = require('./routes/user');
 const postRoutes = require('./routes/post');
@@ -14,7 +12,7 @@ const multer = require('multer');
 
 const app = express();
 // DB 암호화
-require('dotenv').config();
+
 /* token 암호화 생성법 */
 /* node */
 /* require('crypto').randomBytes(64).toString('hex') */

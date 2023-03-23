@@ -3,12 +3,21 @@ const jwt = require('jsonwebtoken');
 const { AccessToken, RefreshToken } = require('../utils/generateTokens');
 // const jwt = require('jsonwebtoken');
 const axios = require('axios');
-require('dotenv').config();
+const dotenv = require('dotenv');
+const path = require('path');
+
+if (process.env.NODE_ENV === 'production') {
+    dotenv.config({ path: path.join(__dirname, '../.env.production') });
+} else if (process.env.NODE_ENV === 'development') {
+    dotenv.config({ path: path.join(__dirname, '../.env.development') });
+} else {
+    dotenv.config();
+}
 
 const KAKAO_OAUTH_TOKEN_API_URL = 'https://kauth.kakao.com/oauth';
 const KAKAO_GRANT_TYPE = 'authorization_code';
-// const KAKAO_REDIRECT_URL = 'http://localhost:5000/api/auth/kakao/callback';
-const KAKAO_REDIRECT_URL = 'https://geondong.com/api/auth/kakao/callback';
+const KAKAO_REDIRECT_URL = process.env.KAKAO_REDIRECT_URL;
+const DOMAIN = process.env.DOMAIN;
 
 exports.kakaoToken = async (req, res, next) => {
     const { token } = req.cookies;
@@ -172,6 +181,5 @@ exports.kakaoLogin = async (req, res, next) => {
         // console.log(error);
     }
 
-    // return res.redirect('http://localhost:3000');
-    return res.redirect('https://geondong.com');
+    return res.redirect(DOMAIN);
 };

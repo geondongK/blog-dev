@@ -1,5 +1,14 @@
 const mariadb = require('mariadb');
-require('dotenv').config();
+const dotenv = require('dotenv');
+const path = require('path');
+
+if (process.env.NODE_ENV === 'production') {
+    dotenv.config({ path: path.join(__dirname, '../.env.production') });
+} else if (process.env.NODE_ENV === 'development') {
+    dotenv.config({ path: path.join(__dirname, '../.env.development') });
+} else {
+    dotenv.config(); // for .env
+}
 
 const pool = mariadb.createPool({
     host: process.env.DB_HOST,
