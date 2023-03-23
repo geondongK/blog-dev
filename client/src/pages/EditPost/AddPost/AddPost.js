@@ -101,7 +101,7 @@ function AddPost() {
                         { indent: '-1' },
                         { indent: '+1' },
                     ],
-                    ['image'],
+                    ['link', 'image'],
                     [{ align: [] }, { color: [] }, { background: [] }],
                     ['clean'],
                 ],
@@ -126,7 +126,7 @@ function AddPost() {
         'list',
         'bullet',
         'indent',
-        // 'link',
+        'link',
         'image',
         'align',
         'color',
@@ -146,6 +146,7 @@ function AddPost() {
                             placeholder="제목"
                             value={postInfo.title}
                             onChange={handleChangeValue}
+                            onFocus
                         />
                     </div>
                     <div className="quill">

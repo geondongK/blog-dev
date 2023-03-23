@@ -7,8 +7,8 @@ require('dotenv').config();
 
 const KAKAO_OAUTH_TOKEN_API_URL = 'https://kauth.kakao.com/oauth';
 const KAKAO_GRANT_TYPE = 'authorization_code';
-const KAKAO_REDIRECT_URL = 'http://localhost:5000/api/auth/kakao/callback';
-// const KAKAO_REDIRECT_URL="https://geondong.com/api/auth/kakao/callback"
+// const KAKAO_REDIRECT_URL = 'http://localhost:5000/api/auth/kakao/callback';
+const KAKAO_REDIRECT_URL = 'https://geondong.com/api/auth/kakao/callback';
 
 exports.kakaoToken = async (req, res, next) => {
     const { token } = req.cookies;
@@ -172,6 +172,6 @@ exports.kakaoLogin = async (req, res, next) => {
         // console.log(error);
     }
 
-    return res.redirect('http://localhost:3000');
-    // return res.redirect('https://geondong.com');
+    // return res.redirect('http://localhost:3000');
+    return res.redirect('https://geondong.com');
 };
