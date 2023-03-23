@@ -96,6 +96,7 @@
         }
 
         .link {
+            @include aLink;
             margin-top: 5px;
             text-align: right;
             font-size: $f-mid;

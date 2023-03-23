@@ -88,9 +88,13 @@ function PostCard({ post, deletePost }) {
                     </h4>
                 </div>
                 <div className="postcard-footer">
-                    <FontAwesomeIcon icon={faEye} />
+                    <span>
+                        <FontAwesomeIcon icon={faEye} />
+                    </span>
                     <span>{post.view}</span>
-                    <FontAwesomeIcon icon={faCommentDots} />
+                    <span className="footer-icon">
+                        <FontAwesomeIcon icon={faCommentDots} />
+                    </span>
                     <span>{countComment.length}</span>
                 </div>
             </div>

@@ -9,14 +9,6 @@ body {
     background-color: #f5f5f5;
 }
 
-a {
-    color: black;
-    text-decoration-line: none;
-    &:visited {
-        text-decoration: none;
-    }
-}
-
 input,
 textarea,
 select {

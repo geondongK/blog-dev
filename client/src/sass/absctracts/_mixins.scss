@@ -35,3 +35,13 @@ $breakpoints: (
     border: none;
     cursor: pointer;
 }
+
+@mixin aLink() {
+    a {
+        color: #000000;
+        text-decoration-line: none;
+        &:visited {
+            text-decoration: none;
+        }
+    }
+}
