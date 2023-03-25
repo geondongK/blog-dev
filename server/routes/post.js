@@ -10,11 +10,11 @@ router.get('/get/:id', postController.getById);
 // 댓글 수
 router.post('/countComment', postController.countComment);
 // 게시물 작성
-router.post('/', postController.addpost);
+router.post('/', verifyToken, postController.addpost);
 // 게시물 수정
-router.put('/edit/:id', postController.editpost);
+router.put('/edit/:id', verifyToken, postController.editpost);
 // 게시물 삭제
-router.delete('/', postController.deletePost);
+router.delete('/', verifyToken, postController.deletePost);
 // 조회수.
 router.put('/view', postController.addView);
 // 검색.

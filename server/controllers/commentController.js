@@ -32,16 +32,15 @@ exports.addComment = async (req, res) => {
         } = req.body);
 
         const query =
-            'INSERT INTO comment ( postId, userId, parentId, description, userName, createDate) VALUES (?,?,?,?,?,?)';
+            'INSERT INTO comment ( postId, userId, parentId, commentGroup, description, userName, createDate) VALUES (?,?,?,?,?,?,?)';
         const row = await pool.query(query, [
             postId,
-            // req.user.id,
             userId,
+            parentId,
             parentId,
             description,
             userName,
             createDate,
-            // today,
         ]);
 
         // 프론트 map 오류현상 해결.
@@ -82,34 +81,19 @@ exports.deleteComment = async (req, res) => {
     } catch (error) {
         res.json({ error: error.message });
     }
+};
 
-    // if (parentId === null) {
-    //     const selectQuery =
-    //         'SELECT COUNT(*) AS cnt FROM description WHERE group = ? OR id = ?';
-    //     let selectRow = await pool.query(selectQuery, [
-    //         commentId,
-    //         commentId,
-    //     ]);
-    //     cnt = selectRow[0].cnt;
-    // } else {
-    //     const selectQuery =
-    //         'SELECT COUNT(*) AS cnt FROM comment WHERE group = ? OR id = ?';
-    //     let selectRow = await pool.query(selectQuery, [
-    //         parentId,
-    //         commentId,
-    //     ]);
-    //     cnt = selectRow[0].cnt;
-    // }
+// 대댓글 존재 시 삭제 메시지 업데이트
+exports.existComment = async (req, res) => {
+    try {
+        const { commentId } = req.body;
 
-    // if (cnt >= 2) {
-    //     const query = 'UPDATE comment SET isDeleted = true WHERE id = ?';
-    //     const row = await pool.query(query, [commentId]);
-    //     res.json(row);
-    // } else {
-    //     const query = 'DELETE FROM comment WHERE id = ?';
-    //     const row = await pool.query(query, [commentId]);
-    //     res.json(row);
-    // }
+        const query = `UPDATE comment SET isDeleted = true WHERE id = ?`;
+        const row = await pool.query(query, [commentId]);
+        res.json(row);
+    } catch (error) {
+        res.json({ error: error.message });
+    }
 };
 // 좋아요
 exports.getLike = async (req, res) => {

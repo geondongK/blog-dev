@@ -24,6 +24,7 @@ function NestedComments({
     addComment,
     editComment,
     deleteComment,
+    isDeleted,
 }) {
     const [liked, setLiked] = useState([]);
 
@@ -165,7 +166,14 @@ function NestedComments({
                 </div>
             </div>
 
-            <p className="nestedcomments-description">{description}</p>
+            {isDeleted ? (
+                <p className="nestedcomments-description__deleted">
+                    삭제된 댓글입니다
+                </p>
+            ) : (
+                <p className="nestedcomments-description">{description}</p>
+            )}
+
             <div className="nestedcomments-button">
                 {/* 좋아요 버튼 */}
                 {likedButtonComponent()}

@@ -15,6 +15,7 @@ function ComfirmModal({
     const handleDeleteContent = () => {
         if (confirmMoadlCheck === true) {
             deleteContent(id);
+            closeModal(false);
         }
     };
 

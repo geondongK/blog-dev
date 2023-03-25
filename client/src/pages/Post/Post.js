@@ -90,21 +90,54 @@ function Post() {
 
     // 댓글 & 답글 삭제 기능
     const deleteComment = async commentId => {
-        await authContext
-            .delete(`/comment`, {
-                data: {
+        const commentsGroup = postComments.filter(
+            getCommentsGroup =>
+                getCommentsGroup.parentId === commentId ||
+                getCommentsGroup.id === commentId,
+        );
+
+        if (commentsGroup.length > 1) {
+            await authContext
+                .put(`/comment/existComment`, {
                     commentId,
-                },
-            })
-            .then(() => {
-                const newComments = postComments.filter(
-                    newComment => newComment.id !== commentId,
-                );
-                setPostComments(newComments);
-            })
-            .catch(() => {
-                // console.log(error);
-            });
+                })
+                .then(() => {
+                    const updateComments = postComments.map(updateComment => {
+                        if (updateComment.id === commentId) {
+                            return {
+                                ...updateComment,
+                                isDeleted: 1,
+                            };
+                        }
+                        return updateComment;
+                    });
+                    setPostComments(updateComments);
+                    setActiveComment(null);
+                })
+                .catch(() => {
+                    // console.log(error);
+                });
+        } else {
+            await authContext
+                .delete(`/comment`, {
+                    data: {
+                        commentId,
+                    },
+                })
+                .then(() => {
+                    const newComments = postComments.filter(
+                        newComment => newComment.id !== commentId,
+                    );
+                    setPostComments(newComments);
+                })
+                .catch(() => {
+                    // console.log(error);
+                });
+        }
+
+        // if(commentsGroup.length > 1) {
+
+        // }
     };
 
     useEffect(() => {
@@ -152,6 +185,7 @@ function Post() {
                         <PostComments
                             key={mainPostComment.id}
                             commentId={mainPostComment.id}
+                            isDeleted={mainPostComment.isDeleted}
                             mainPostComment={mainPostComment}
                             subPostComment={getNestedComments(
                                 mainPostComment.id,

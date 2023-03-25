@@ -5,8 +5,8 @@ const { verifyToken } = require('../middleware/verifyToken');
 
 router.get('/:id', likedController.getLike);
 // 좋아요 추가.
-router.post('/', likedController.addLike);
+router.post('/', verifyToken, likedController.addLike);
 // 좋아요 삭제.
-router.delete('/', likedController.deleteLike);
+router.delete('/', verifyToken, likedController.deleteLike);
 
 module.exports = router;

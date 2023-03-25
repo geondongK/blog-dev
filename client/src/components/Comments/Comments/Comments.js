@@ -12,6 +12,7 @@ import NestedComment from '../NestedComment/NestedComment';
 
 function Comments({
     mainPostComment,
+    isDeleted,
     subPostComment,
     addComment,
     editComment,
@@ -28,6 +29,7 @@ function Comments({
             {/* 대댓글 */}
             <NestedComments
                 commentId={commentId}
+                isDeleted={isDeleted}
                 userId={mainPostComment.userId}
                 name={mainPostComment.userName}
                 description={mainPostComment.description}
