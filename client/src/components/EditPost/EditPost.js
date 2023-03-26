@@ -39,7 +39,7 @@ function EditPost({ postcontent }) {
             try {
                 const response = await authContext.post('/upload', formData);
 
-                const IMG_URL = `${process.env.REACT_APP_API_URL_IMAGE}${response.data}`;
+                const IMG_URL = response.data.location;
 
                 const editor = quillRef.current.getEditor();
 
@@ -86,7 +86,7 @@ function EditPost({ postcontent }) {
         () => ({
             toolbar: {
                 container: [
-                    // [{ header: [1, 2, false] }],
+                    [{ header: [1, 2, 3, false] }],
                     ['bold', 'italic', 'underline', 'strike', 'blockquote'],
                     [
                         { list: 'ordered' },
@@ -96,7 +96,7 @@ function EditPost({ postcontent }) {
                     ],
                     ['link', 'image'],
                     [{ align: [] }, { color: [] }, { background: [] }],
-                    ['clean'],
+                    // ['clean'],
                 ],
                 handlers: { image: imageHandler },
             },
@@ -109,8 +109,8 @@ function EditPost({ postcontent }) {
     );
 
     const formats = [
-        // 'font',
-        // 'header',
+        'font',
+        'header',
         'bold',
         'italic',
         'underline',

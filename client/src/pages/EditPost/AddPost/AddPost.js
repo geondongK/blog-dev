@@ -19,6 +19,8 @@ function AddPost() {
     });
     const [isError, setError] = useState(null);
 
+    // const [img, setImg] = useState('');
+
     const quillRef = useRef();
 
     const { currentUser } = useSelector(state => state.user);
@@ -41,7 +43,7 @@ function AddPost() {
             try {
                 const response = await authContext.post('/upload', formData);
 
-                const IMG_URL = `${process.env.REACT_APP_API_URL_IMAGE}${response.data}`;
+                const IMG_URL = response.data.location;
 
                 const editor = quillRef.current.getEditor();
 
@@ -93,7 +95,7 @@ function AddPost() {
         () => ({
             toolbar: {
                 container: [
-                    // [{ header: [1, 2, false] }],
+                    [{ header: [1, 2, 3, false] }],
                     ['bold', 'italic', 'underline', 'strike', 'blockquote'],
                     [
                         { list: 'ordered' },
@@ -103,7 +105,7 @@ function AddPost() {
                     ],
                     ['link', 'image'],
                     [{ align: [] }, { color: [] }, { background: [] }],
-                    ['clean'],
+                    // ['clean'],
                 ],
                 handlers: { image: imageHandler },
             },
@@ -116,8 +118,8 @@ function AddPost() {
     );
 
     const formats = [
-        // 'font',
-        // 'header',
+        'font',
+        'header',
         'bold',
         'italic',
         'underline',
@@ -146,7 +148,6 @@ function AddPost() {
                             placeholder="제목"
                             value={postInfo.title}
                             onChange={handleChangeValue}
-                            onFocus
                         />
                     </div>
                     <div className="quill">
