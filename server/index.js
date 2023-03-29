@@ -81,10 +81,48 @@ const upload = multer({
     }),
     acl: 'public-read-write',
     limits: { fileSize: 5 * 1024 * 1024 },
+    // limits: { fileSize: 5 * 1024 },
 });
 
-app.post('/api/upload', upload.single('file'), (req, res) => {
-    res.status(200).json({ location: req.file.location });
+// 이미지 업로드 테스트.
+// const upload = multer({
+//     storage: multer.diskStorage({
+//         // 저장할 장소
+//         destination(req, file, cb) {
+// 서버에 폴더 생성.
+//             cb(null, 'public/uploads');
+//         },
+//         // 저장할 이미지의 파일명
+//         filename(req, file, cb) {
+//             let ext = file.mimetype.split('/')[1];
+//             // const ext = path.extname(file.originalname); // 파일의 확장자
+//             // console.log(ext);
+//             // if (!['png', 'jpg', 'jpeg', 'gif', 'bmp'].includes(ext)) {
+//             if (!['png', 'jpg', 'jpeg', 'gif', 'bmp'].includes(ext)) {
+//                 return cb(new Error('Only images are allowed'));
+//             }
+//             // 파일명이 절대 겹치지 않도록 해줘야한다.
+//             // 파일이름 + 현재시간밀리초 + 파일확장자명
+//             cb(null, path.basename(file.originalname, ext) + Date.now() + ext);
+//         },
+//     }),
+//     // 파일 허용 사이즈 (5 MB)
+//     limits: { fileSize: 5 * 1024 * 1024 },
+//     // limits: { fileSize: 5 * 1024 },
+// });
+
+let uploads = upload.single('file');
+
+app.post('/api/upload', function (req, res) {
+    uploads(req, res, function (error) {
+        if (error) {
+            return res.json({ error: error.message });
+        }
+        res.status(200).json({ location: req.file.location });
+        // 이미지 업로드 테스트.
+        // const IMG_URL = `http://localhost:5000/uploads/${req.file.filename}`;
+        // res.json({ url: IMG_URL });
+    });
 });
 
 app.use('/api/user', userRoutes);

@@ -16,6 +16,7 @@
         "@testing-library/user-event": "^13.5.0",
         "aws-sdk": "^2.1343.0",
         "axios": "^0.26.0",
+        "browser-image-compression": "^2.0.2",
         "dompurify": "^2.4.3",
         "dotenv": "^16.0.1",
         "env-cmd": "^10.1.0",

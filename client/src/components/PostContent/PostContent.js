@@ -34,6 +34,7 @@ function PostContent({ postcontent, description }) {
                 <h3>{postcontent.title}</h3>
             </div>
             <p
+                className="postcontent-description"
                 dangerouslySetInnerHTML={{
                     __html: Dompurify.sanitize(description),
                 }}

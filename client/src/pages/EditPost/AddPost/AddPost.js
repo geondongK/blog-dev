@@ -1,7 +1,9 @@
+/* eslint-disable no-alert */
 /* eslint-disable react/no-danger */
-//   eslint-disable
+// eslint-disable
 import React, { useMemo, useRef, useState } from 'react';
 import ReactQuill, { Quill } from 'react-quill';
+import imageCompression from 'browser-image-compression';
 import '../EditPost.scss';
 
 import 'react-quill/dist/quill.snow.css';
@@ -10,6 +12,7 @@ import { useNavigate } from 'react-router-dom';
 
 import ImageResize from 'quill-image-resize';
 import authContext from '../../../libs/api/AuthContext';
+import loading from '../../../assets/images/loading.gif';
 
 Quill.register('modules/ImageResize', ImageResize);
 function AddPost() {
@@ -19,14 +22,12 @@ function AddPost() {
     });
     const [isError, setError] = useState(null);
 
-    // const [img, setImg] = useState('');
-
     const quillRef = useRef();
 
     const { currentUser } = useSelector(state => state.user);
     const navigate = useNavigate();
 
-    const imageHandler = () => {
+    const imageHandler = async () => {
         // 이미지를 저장할 input type=file DOM을 생성.
         const input = document.createElement('input');
 
@@ -37,21 +38,45 @@ function AddPost() {
         input.addEventListener('change', async () => {
             const file = input.files[0];
 
-            const formData = new FormData();
-            formData.append('file', file);
+            // 압축 옵션
+            const options = {
+                maxSizeMB: 0.2,
+                maxWidthOrHeight: 1920,
+                useWebWorker: true,
+            };
+
+            const editor = quillRef.current.getEditor();
+
+            const range = editor.getSelection(true);
+
+            editor.insertEmbed(range.index, 'image', loading);
 
             try {
+                const compressedFile = await imageCompression(file, options);
+
+                const formData = new FormData();
+                formData.append('file', compressedFile);
+
                 const response = await authContext.post('/upload', formData);
 
+                const messgae = response.data.error;
+
+                if (messgae === 'File too large') {
+                    window.alert('5MB 이하 사진만 올려주세요');
+                    editor().deleteText(range.index);
+                } else if (messgae === 'Only images are allowed') {
+                    window.alert('이미지 파일만 올려주세요.');
+                    editor().deleteText(range.index);
+                }
+
+                // 압축 결과
                 const IMG_URL = response.data.location;
 
-                const editor = quillRef.current.getEditor();
-
-                const range = editor.getSelection();
+                editor.deleteText(range.index, 1);
 
                 editor.insertEmbed(range.index, 'image', IMG_URL);
             } catch (error) {
-                // console.log(error);
+                editor.deleteText(range.index, 1);
             }
         });
     };
