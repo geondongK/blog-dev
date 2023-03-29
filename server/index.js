@@ -21,9 +21,9 @@ const app = express();
 /* require('crypto').randomBytes(64).toString('hex') */
 
 if (process.env.NODE_ENV === 'production') {
-    dotenv.config({ path: path.join(__dirname, '../.env.production') });
+    dotenv.config({ path: path.join(__dirname, './.env.production') });
 } else if (process.env.NODE_ENV === 'development') {
-    dotenv.config({ path: path.join(__dirname, '../.env.development') });
+    dotenv.config({ path: path.join(__dirname, './.env.development') });
 } else {
     dotenv.config(); // for .env
 }
