@@ -52,13 +52,17 @@
     .nestedcomments-like {
         display: flex;
         justify-items: center;
-        // justify-content: center;
         gap: 2px;
         font-size: $f-small;
-        margin: 10px 0 0 5px;
+        margin: 10px 0 5px 5px;
+
+        .like-button {
+            cursor: Default;
+        }
 
         span {
-            font-size: $f-small;
+            display: flex;
+            justify-items: center;
         }
     }
 

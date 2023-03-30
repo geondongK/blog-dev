@@ -50,8 +50,14 @@
     }
 
     .nestedcomments-button {
+        display: flex;
+        justify-items: center;
         font-size: $f-small;
         margin-top: 10px;
+
+        .like-button {
+            cursor: Default;
+        }
 
         span {
             margin-left: 3px;

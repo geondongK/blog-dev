@@ -111,7 +111,12 @@ function NestedComment({
                             handleDeleteLike(commentId);
                         }}
                     >
-                        <FontAwesomeIcon style={{ color: 'red' }} icon={like} />
+                        <FontAwesomeIcon
+                            style={{
+                                color: 'red',
+                            }}
+                            icon={like}
+                        />
                     </button>
                 );
             }
@@ -126,7 +131,11 @@ function NestedComment({
                 </button>
             );
         }
-        return <FontAwesomeIcon icon={dislike} />;
+        return (
+            <button className="like-button" type="button">
+                <FontAwesomeIcon icon={dislike} />
+            </button>
+        );
     }
 
     useEffect(() => {

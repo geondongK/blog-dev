@@ -1,37 +1,39 @@
 /* eslint-disable */
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 // import { persistor } from '../Redux/store/store';
 import { persistor } from '../../redux/store/store';
 // import { getCookies } from '../../utils/Cookie';
 
-const instance = axios.create({    
-    baseURL: process.env.REACT_APP_API_URL,        
+// const navigate = useNavigate();
+
+const instance = axios.create({
+    baseURL: process.env.REACT_APP_API_URL,
     // timeout: 5000,
-    withCredentials: true,    
+    withCredentials: true,
     // headers: {'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json'},
-})
+});
 
 const logout = async () => {
     instance
-            .post('/auth/logout', {})
-            .then(() => {
-                // navigate('/');
-                // header 입력
-                // dispatch(logout({}))
-                // window.location.reload();
-            })
-            .catch(() => {});    
-}
+        .post('/auth/logout', {})
+        .then(() => {
+            // navigate('/');
+            // header 입력
+            // dispatch(logout({}))
+            // window.location.reload();
+        })
+        .catch(() => {});
+};
 
 const purge = async () => {
     await persistor.purge();
 };
 
 // instance.interceptors.request.use(
-//     function (config) {         
-//         // console.log(tokne);        
-                                
+//     function (config) {
+//         // console.log(tokne);
+
 //         if (token) {
 //             config.headers['Authorization'] = 'Bearer ' + token;
 //         }
@@ -46,27 +48,35 @@ const purge = async () => {
 // );
 
 instance.interceptors.response.use(
-    function (response) {        
+    function (response) {
         return response;
     },
     async function (error) {
         const originalRequest = error.config;
 
-        if (error.response.status === 401 && !error.response.data.isLoggedIn && !originalRequest._retry) {
-            try {                
+        if (
+            error.response.status === 401 &&
+            !error.response.data.isLoggedIn &&
+            !originalRequest._retry
+        ) {
+            try {
                 originalRequest._retry = true;
-                const res = await instance.post('/auth/refreshToken');                
-                                                              
-                if (res.data.status === 200) {            
-                    originalRequest.headers['Authorization'] = 'Bearer ' + res.data.accessToken;                                                                        
+                const res = await instance.post('/auth/refreshToken');
+
+                if (res.data.status === 200) {
+                    originalRequest.headers['Authorization'] =
+                        'Bearer ' + res.data.accessToken;
                 }
-                                
+
                 return instance(originalRequest);
-            } catch (error) {                
+            } catch (error) {
                 purge();
                 logout();
-                location.reload();                
-                
+                // location.reload();
+                window.alert(
+                    '세션이 만료되었습니다. 계속하려면 다시 로그인 하세요',
+                );
+
                 Promise.reject(error);
             }
         }
@@ -75,4 +85,3 @@ instance.interceptors.response.use(
 );
 
 export default instance;
-

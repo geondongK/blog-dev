@@ -8,6 +8,7 @@ import { faHeart as dislike } from '@fortawesome/free-regular-svg-icons';
 import { faHeart as like } from '@fortawesome/free-solid-svg-icons';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
+import authContext from '../../../libs/api/AuthContext';
 import customAxios from '../../../libs/api/axios';
 import { ReactComponent as Avatar } from '../../../assets/images/avatar.svg';
 import CommentDropdown from '../CommentDropdown/CommentDropdown';
@@ -50,7 +51,7 @@ function NestedComments({
 
     // 좋아요 추가
     const handleAddLike = async addLikeId => {
-        await customAxios
+        await authContext
             .post('/liked', {
                 postId: id,
                 commentId: addLikeId,
@@ -65,7 +66,7 @@ function NestedComments({
     };
     // 좋아요 삭제
     const handleDeleteLike = async deleteCommentId => {
-        await customAxios
+        await authContext
             .delete('/liked', {
                 data: {
                     commentId: deleteCommentId,
@@ -134,7 +135,11 @@ function NestedComments({
                 </button>
             );
         }
-        return <FontAwesomeIcon icon={dislike} />;
+        return (
+            <button className="like-button" type="button">
+                <FontAwesomeIcon icon={dislike} />
+            </button>
+        );
     }
 
     useEffect(() => {
