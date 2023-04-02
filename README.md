@@ -1,7 +1,7 @@
 ## 프로젝트 소개
 일상 공유 및 소통하는 블로그
 
-# 개발 환경
+## 개발 환경
 - Node.js + Express + React
 - MariaDB 10.3.34
 - Sass
