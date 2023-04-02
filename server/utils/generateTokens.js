@@ -7,7 +7,8 @@ module.exports = {
     AccessToken: (id, name, type) => {
         // const payload = {};
         return jwt.sign({ id, name, type }, process.env.ACCESS_TOKEN_SECRET, {
-            expiresIn: '30m', // 토큰의 만료시간 10분 or 15분
+            expiresIn: '1h', // 토큰의 만료시간 10분 or 15분
+            // expiresIn: '30m', // 토큰의 만료시간 10분 or 15분
             // expiresIn: '5s', // 토큰의 만료시간 10분 or 15분
             algorithm: 'HS256', // 암호화
             // issuer: 'localhost', // 발급자명
@@ -30,7 +31,8 @@ module.exports = {
     RefreshToken: () => {
         return jwt.sign({}, process.env.REFRESH_TOKEN_SECRET, {
             algorithm: 'HS256', // 암호화
-            expiresIn: '6h', // 토큰의 만료시간 //
+            expiresIn: '1d', // 토큰의 만료시간 //
+            // expiresIn: '6h', // 토큰의 만료시간 //
             // expiresIn: '10s', // 토큰의 만료시간 //
         });
     },

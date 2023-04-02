@@ -169,7 +169,8 @@ exports.refreshToken = async (req, res) => {
                             // 2h
                         },
                         process.env.ACCESS_TOKEN_SECRET,
-                        { expiresIn: '30m', algorithm: 'HS256' },
+                        { expiresIn: '1h', algorithm: 'HS256' },
+                        // { expiresIn: '30m', algorithm: 'HS256' },
                         // { expiresIn: '10s', algorithm: 'HS256' },
                     );
 
@@ -195,7 +196,8 @@ exports.refreshToken = async (req, res) => {
                             name: userInfo.name,
                         },
                         process.env.ACCESS_TOKEN_SECRET,
-                        { expiresIn: '30m', algorithm: 'HS256' },
+                        { expiresIn: '1h', algorithm: 'HS256' },
+                        // { expiresIn: '30m', algorithm: 'HS256' },
                         // { expiresIn: '10s', algorithm: 'HS256' },
                     );
 

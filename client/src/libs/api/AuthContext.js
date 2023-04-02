@@ -77,9 +77,15 @@ instance.interceptors.response.use(
                     '세션이 만료되었습니다. 계속하려면 다시 로그인 하세요',
                 );
 
-                Promise.reject(error);
+                return Promise.reject(error);
             }
         }
+        purge();
+        logout();
+        // window.alert('세션이 만료되었습니다. 계속하려면 다시 로그인 하세요');
+        // purge();
+        // logout();
+        // location.reload();
         return Promise.reject(error);
     },
 );

@@ -12,6 +12,9 @@ src/pages/ProfilePage.js
 src/pages/PaginationPage.js
 src/pages/MainPage.js
 
+src/components/Modal/Alert/Alert.js
+src/components/Modal/Alert/Alert.scss
+
 src/Redux/slices/TokenSlice.js
 src/Redux/slices/commentSlice.js
 src/Redux/slices/searchSlice.js
