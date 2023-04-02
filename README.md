@@ -7,7 +7,9 @@
 - Sass
 
 ## 서버
-- AWS EC2 Ubuntu(20.04.1 LTS) + S3 + Nginx 
+- AWS EC2 Ubuntu(20.04.1 LTS)
+- AWS S3 
+- Nginx 
 
 ## 주요 기능
  **로그인**
