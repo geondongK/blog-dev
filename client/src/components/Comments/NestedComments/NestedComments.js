@@ -1,4 +1,4 @@
-//   eslint-disable
+//  eslint-disable
 import './NestedComments.scss';
 import React, { useEffect, useState } from 'react';
 import moment from 'moment';
