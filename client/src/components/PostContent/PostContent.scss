@@ -36,9 +36,18 @@
     .postcontent-title {
         margin-top: 10px;
         margin-bottom: 10px;
+
+        .postcontent-title-body {
+            display: inline-block;
+            width: 300px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
     }
 
     .postcontent-description {
+        word-break: break-all;
         img {
             width: auto;
             max-width: 100%;

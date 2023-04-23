@@ -31,7 +31,7 @@ function PostContent({ postcontent, description }) {
             </div>
 
             <div className="postcontent-title">
-                <h3>{postcontent.title}</h3>
+                <h3 className="postcontent-title-body">{postcontent.title}</h3>
             </div>
             <p
                 className="postcontent-description"
