@@ -15,7 +15,7 @@
  **로그인**
  - DB값 검증
  - 카카오톡 로그인 API
- - 로그인 시 accesstoken, refreshtoken 쿠키 및 로컬 생성
+ - 로그인 시 accesstoken, refreshtoken 쿠키 및 토 생성
  
 **회원가입**
  - DB값 검증
