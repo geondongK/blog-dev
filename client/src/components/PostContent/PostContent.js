@@ -1,5 +1,5 @@
 /* eslint-disable react/no-danger */
-// eslint-disable
+/* eslint-disable */
 import './PostContent.scss';
 import React from 'react';
 import moment from 'moment';
