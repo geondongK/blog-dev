@@ -1,4 +1,4 @@
-// eslint-disable
+//  eslint-disable
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import moment from 'moment';
 import customAxios from '../../libs/api/axios';
@@ -9,9 +9,15 @@ import Loading from '../../components/Loading/Loading';
 import './Home.scss';
 
 function Home() {
+    const btnSort = [
+        { key: 1, type: '최신순' },
+        { key: 2, type: '오래된순' },
+        { key: 3, type: '조회수' },
+    ];
+
     // 게시물 출력
     const [posts, setPosts] = useState([]);
-
+    const [btnActive, setBtnActive] = useState('');
     // 다음 페이지 여부 확인.
     const [hasNextPage, setHasNextPage] = useState(true);
     const [loading, setLoading] = useState(true);
@@ -40,7 +46,7 @@ function Home() {
     // 정렬기능.
     const handleChangeValue = sort => {
         // 최신
-        if (sort === 'desc') {
+        if (sort === '최신순') {
             const dateDesc = posts
                 .filter(post => post)
                 .sort(
@@ -58,9 +64,9 @@ function Home() {
                             ),
                         ),
                 );
-
+            setBtnActive(sort);
             setPosts(dateDesc);
-        } else if (sort === 'asc') {
+        } else if (sort === '오래된순') {
             // 오래된순
             const dateAsc = posts
                 .filter(post => post)
@@ -79,7 +85,7 @@ function Home() {
                             ),
                         ),
                 );
-
+            setBtnActive(sort);
             setPosts(dateAsc);
         } else {
             // 조회수
@@ -87,6 +93,7 @@ function Home() {
                 .filter(post => post)
                 .sort((a, b) => b.view - a.view);
 
+            setBtnActive(sort);
             setPosts(view);
         }
     };
@@ -108,13 +115,6 @@ function Home() {
         }
     }, []);
 
-    // useEffect(() => {
-    //     console.log(confirmMoadlCheck);
-    //     if (1 === 2) {
-    //         deletePost();
-    //     }
-    // }, []);
-
     useEffect(() => {
         if (!observerTargetEl.current || !hasNextPage) {
             setLoading(false);
@@ -127,6 +127,7 @@ function Home() {
         });
         io.observe(observerTargetEl.current);
 
+        setBtnActive('최신순');
         // return () => {
         //     io.disconnect();
         // };
@@ -135,30 +136,23 @@ function Home() {
     return (
         <div className="home">
             <div className="sort-button">
-                <button
-                    type="button"
-                    onClick={() => {
-                        handleChangeValue('desc');
-                    }}
-                >
-                    최신순
-                </button>
-                <button
-                    type="button"
-                    onClick={() => {
-                        handleChangeValue('asc');
-                    }}
-                >
-                    오래된순
-                </button>
-                <button
-                    type="button"
-                    onClick={() => {
-                        handleChangeValue('view');
-                    }}
-                >
-                    조회수
-                </button>
+                {btnSort.map(item => {
+                    return (
+                        <button
+                            key={item.key}
+                            type="button"
+                            onClick={() => {
+                                handleChangeValue(item.type);
+                                setBtnActive(item.type);
+                            }}
+                            className={`${
+                                btnActive === item.type ? 'btn-active' : ''
+                            }`}
+                        >
+                            {item.type}
+                        </button>
+                    );
+                })}
             </div>
             {posts.map(post => (
                 <PostsCard key={post.id} post={post} deletePost={deletePost} />

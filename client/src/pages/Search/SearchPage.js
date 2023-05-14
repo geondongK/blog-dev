@@ -1,12 +1,19 @@
 //  eslint-disable
 import React, { useEffect, useState } from 'react';
+import moment from 'moment';
 import { useLocation } from 'react-router-dom';
 import customAxios from '../../libs/api/axios';
 import PostCard from '../../components/PostCard/PostCard/PostCard';
 
 function Search() {
+    const btnSort = [
+        { key: 1, type: '최신순' },
+        { key: 2, type: '오래된순' },
+        { key: 3, type: '조회수' },
+    ];
     // 게시물 출력.
     const [posts, setPosts] = useState([]);
+    const [btnActive, setBtnActive] = useState('');
 
     const query = decodeURI(useLocation().search);
 
@@ -35,22 +42,46 @@ function Search() {
     // 정렬기능.
     const handleChangeValue = sort => {
         // 최신
-        if (sort === 'desc') {
+        if (sort === '최신순') {
             const dateDesc = posts
                 .filter(post => post)
                 .sort(
-                    (a, b) => new Date(b.createDate) - new Date(a.createDate),
+                    (a, b) =>
+                        new Date(
+                            moment().format(
+                                b.createDate,
+                                'YYYY-MM-DD HH:mm:ss',
+                            ),
+                        ) -
+                        new Date(
+                            moment().format(
+                                a.createDate,
+                                'YYYY-MM-DD HH:mm:ss',
+                            ),
+                        ),
                 );
-
+            setBtnActive(sort);
             setPosts(dateDesc);
-        } else if (sort === 'asc') {
+        } else if (sort === '오래된순') {
             // 오래된순
             const dateAsc = posts
                 .filter(post => post)
                 .sort(
-                    (a, b) => new Date(a.createDate) - new Date(b.createDate),
+                    (a, b) =>
+                        new Date(
+                            moment().format(
+                                a.createDate,
+                                'YYYY-MM-DD HH:mm:ss',
+                            ),
+                        ) -
+                        new Date(
+                            moment().format(
+                                b.createDate,
+                                'YYYY-MM-DD HH:mm:ss',
+                            ),
+                        ),
                 );
-
+            setBtnActive(sort);
             setPosts(dateAsc);
         } else {
             // 조회수
@@ -58,6 +89,7 @@ function Search() {
                 .filter(post => post)
                 .sort((a, b) => b.view - a.view);
 
+            setBtnActive(sort);
             setPosts(view);
         }
     };
@@ -69,36 +101,31 @@ function Search() {
             setPosts(response.data);
         };
         fetchPost();
+        setBtnActive('최신순');
+
         // setLoading(false);
     }, [query]);
 
     return (
         <div className="home">
             <div className="sort-button">
-                <button
-                    type="button"
-                    onClick={() => {
-                        handleChangeValue('desc');
-                    }}
-                >
-                    최신순
-                </button>
-                <button
-                    type="button"
-                    onClick={() => {
-                        handleChangeValue('asc');
-                    }}
-                >
-                    오래된순
-                </button>
-                <button
-                    type="button"
-                    onClick={() => {
-                        handleChangeValue('view');
-                    }}
-                >
-                    조회수
-                </button>
+                {btnSort.map(item => {
+                    return (
+                        <button
+                            key={item.key}
+                            type="button"
+                            onClick={() => {
+                                handleChangeValue(item.type);
+                                setBtnActive(item.type);
+                            }}
+                            className={`${
+                                btnActive === item.type ? 'btn-active' : ''
+                            }`}
+                        >
+                            {item.type}
+                        </button>
+                    );
+                })}
             </div>
             {posts.map(post => (
                 <PostCard key={post.id} post={post} deletePost={deletePost} />
