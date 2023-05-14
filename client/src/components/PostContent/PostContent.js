@@ -1,5 +1,5 @@
 /* eslint-disable react/no-danger */
-/* eslint-disable */
+// eslint-disable
 import './PostContent.scss';
 import React from 'react';
 import moment from 'moment';
@@ -22,7 +22,7 @@ function PostContent({ postcontent, description }) {
                             {postcontent.name}
                         </span>
                         <span className="postcontent-date">
-                            {moment(postcontent.creatDate).format(
+                            {moment(postcontent.createDate).format(
                                 'YYYY년 M월 D일',
                             )}
                         </span>
