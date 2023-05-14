@@ -5,6 +5,7 @@
     // width: 100%;
     padding: 0 20%;
     margin-top: 10px;
+    margin-bottom: 10px;
     @include sm {
         padding: 0 3%;
     }
@@ -13,6 +14,10 @@
         display: flex;
         justify-content: right;
 
+        .btn-active {
+            color: black;
+        }
+
         button {
             @include btn;
             font-weight: bold;
@@ -20,11 +25,11 @@
             margin-left: 5px;
             color: #9e9e9e;
             &:hover {
-                color: black;
+                color: $base-black-color;
             }
             @include sm {
                 &:hover {
-                    color: #9e9e9e;
+                    color: $base-black-color;
                 }
             }
         }
