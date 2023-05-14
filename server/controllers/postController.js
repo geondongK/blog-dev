@@ -128,8 +128,10 @@ exports.search = async (req, res) => {
     const search = req.query.q;
 
     try {
-        const query = 'SELECT * FROM post WHERE title LIKE ?';
+        const query =
+            'SELECT * FROM post WHERE title LIKE ? ORDER BY createDate DESC';
         const row = await pool.query(query, ['%' + search + '%']);
+
         res.status(200).json(row);
     } catch (error) {
         res.json({ error: error.message });

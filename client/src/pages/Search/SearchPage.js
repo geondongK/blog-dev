@@ -22,21 +22,19 @@ function Search() {
     // 게시물 삭제 기능.
     const deletePost = async postId => {
         // eslint-disable-next-line no-alert
-        if (window.confirm('게시물을 삭제하시겠습니까?')) {
-            await customAxios
-                .delete('/post', {
-                    data: {
-                        postId,
-                    },
-                })
-                .then(() => {
-                    const newPosts = posts.filter(post => post.id !== postId);
-                    setPosts(newPosts);
-                })
-                .catch(() => {
-                    // console.log(error);
-                });
-        }
+        await customAxios
+            .delete('/post', {
+                data: {
+                    postId,
+                },
+            })
+            .then(() => {
+                const newPosts = posts.filter(post => post.id !== postId);
+                setPosts(newPosts);
+            })
+            .catch(() => {
+                // console.log(error);
+            });
     };
 
     // 정렬기능.
